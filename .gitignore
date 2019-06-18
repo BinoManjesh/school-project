@@ -4,5 +4,6 @@
 *.bluej
 *.txt
 .git
+.project
 Main.java
 src/
