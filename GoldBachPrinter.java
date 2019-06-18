@@ -1,22 +1,22 @@
 import java.util.Scanner;
 
-class GoldBachChecker {
+//Accepts a number and prints all the ways it can be expressed as the sum of 2 odd prime numbers
+class GoldBachPrinter {
     
     int n;
     
-    GoldBachChecker (int n) {
+    GoldBachPrinter (int n) {
         this.n = n;
     }
     
-    boolean check () {
-        for (int i = 2; i < n; i ++) {
+    void print () {
+        for (int i = 2; i <= n / 2; i ++) {
             if (checkIfOddPrime(i)) {
                 if (checkIfOddPrime(n - i)) {
-                    return true;
+                    System.out.println(i + " + " + (n - i));
                 }
             }
         }
-        return false;
     }
     
     boolean checkIfOddPrime (int n) {
@@ -37,14 +37,10 @@ class GoldBachChecker {
         System.out.print("Enter a number: ");
         int n = sc.nextInt();
         
-        GoldBachChecker c = new GoldBachChecker(n);
+        GoldBachPrinter c = new GoldBachPrinter(n);
         assert c.checkIfOddPrime(2);
         assert c.checkIfOddPrime(7);
         assert !c.checkIfOddPrime(4);
-        if (c.check()) {
-            System.out.print(n + " is a Gold Bach number");
-        } else {
-            System.out.print(n + " is not a Gold Bach number");
-        }
+		c.print();
     }
 }
