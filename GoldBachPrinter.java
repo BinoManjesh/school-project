@@ -20,7 +20,7 @@ class GoldBachPrinter {
     }
     
     boolean checkIfOddPrime (int n) {
-		// 2 is the only even prime number
+	// 2 is the only even prime number
         if (n == 1 || n == 2) {
             return false;
         }
@@ -41,6 +41,6 @@ class GoldBachPrinter {
         assert c.checkIfOddPrime(2);
         assert c.checkIfOddPrime(7);
         assert !c.checkIfOddPrime(4);
-		c.print();
+	c.print();
     }
 }
