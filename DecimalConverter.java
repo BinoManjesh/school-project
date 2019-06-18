@@ -6,7 +6,7 @@ class DecimalConverter {
     String num;
     double decimal;
 
-    public DecimalConverter (int base, String num) {
+    DecimalConverter (int base, String num) {
         this.base = base;
         this.num = num;
         decimal = 0.0;
