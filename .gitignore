@@ -5,6 +5,7 @@
 *.txt
 .git
 .project
+.classpath
 Main.java
 src/
 bin/
