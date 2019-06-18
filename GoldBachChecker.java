@@ -10,8 +10,8 @@ class GoldBachChecker {
     
     boolean check () {
         for (int i = 2; i < n; i ++) {
-            if (checkIsPrime(i)) {
-                if (checkIsPrime(n - i)) {
+            if (checkIfOddPrime(i)) {
+                if (checkIfOddPrime(n - i)) {
                     return true;
                 }
             }
@@ -19,8 +19,9 @@ class GoldBachChecker {
         return false;
     }
     
-    boolean checkIsPrime (int n) {
-        if (n == 1) {
+    boolean checkIfOddPrime (int n) {
+		// 2 is the only even prime number
+        if (n == 1 || n == 2) {
             return false;
         }
         for (int i = 2; i < n; i++) {
@@ -37,9 +38,9 @@ class GoldBachChecker {
         int n = sc.nextInt();
         
         GoldBachChecker c = new GoldBachChecker(n);
-        assert c.checkIsPrime(2);
-        assert c.checkIsPrime(7);
-        assert !c.checkIsPrime(4);
+        assert c.checkIfOddPrime(2);
+        assert c.checkIfOddPrime(7);
+        assert !c.checkIfOddPrime(4);
         if (c.check()) {
             System.out.print(n + " is a Gold Bach number");
         } else {
