@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
-//Converts a number in any base to base 10
+/**
+ * Converts a number in any base to base 10
+ */
 class DecimalConverter {
 
     int base;

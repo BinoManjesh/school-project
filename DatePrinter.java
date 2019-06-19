@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
-// Accepts day, month, year and prints it in dd/mm/yy format
+/**
+ * Accepts day, month, year and prints it in dd/mm/yy format
+ */ 
 class DatePrinter {
 
     int day;

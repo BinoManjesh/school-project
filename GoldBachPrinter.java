@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
-//Accepts a number and prints all the ways it can be expressed as the sum of 2 odd prime numbers
+/**
+ * Accepts a number and prints all the ways it can be expressed as the sum of 2 odd prime numbers
+ */ 
 class GoldBachPrinter {
     
     int n;
@@ -38,7 +40,7 @@ class GoldBachPrinter {
         int n = sc.nextInt();
         
         GoldBachPrinter c = new GoldBachPrinter(n);
-        assert c.checkIfOddPrime(2);
+        assert !c.checkIfOddPrime(2);
         assert c.checkIfOddPrime(7);
         assert !c.checkIfOddPrime(4);
 	c.print();
