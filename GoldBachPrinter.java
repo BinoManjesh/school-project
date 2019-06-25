@@ -7,10 +7,8 @@ class GoldBachPrinter {
 	
     void print (int n) {
         for (int i = 2; i <= n / 2; i ++) {
-            if (checkIfOddPrime(i)) {
-                if (checkIfOddPrime(n - i)) {
-                    System.out.println(i + " + " + (n - i));
-                }
+            if (checkIfOddPrime(i) && checkIfOddPrime(n - i)) {
+                System.out.println(i + " + " + (n - i));
             }
         }
     }

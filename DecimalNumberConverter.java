@@ -13,16 +13,17 @@ class DecimalNumberConverter {
             } else {
                 num = (intN % targetBase) + num;
             }
-            
             intN = intN / targetBase;
         }
-        String fractional = "";
-        while (fraction != 0) {
-            fraction *= targetBase;
-            fractional += (int)fraction;
-            fraction -= (int)fraction;
+        if (fraction != 0) {
+            num += ".";
+            while (fraction != 0) {
+                fraction *= targetBase;
+                num += (int)fraction;
+                fraction -= (int)fraction;
+            }
         }
-        return num + "." + fractional;
+        return num;
     }
     
     public static void main () {

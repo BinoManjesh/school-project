@@ -26,7 +26,7 @@ class NumberDecimalConverter {
             }
             j--;
         }
-		return decimal;
+	return decimal;
     }
 
     public static void main () {
