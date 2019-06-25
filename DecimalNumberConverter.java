@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Converts a decimal number to any number system
+ */
 class DecimalNumberConverter {
     
     String convert (double n, int targetBase) {
