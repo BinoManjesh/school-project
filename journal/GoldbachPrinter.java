@@ -8,15 +8,15 @@ import java.util.Scanner;
 class GoldbachPrinter {
 	
     void print (int n) {
-        for (int i = 2; i <= n / 2; i ++) {
-            if (checkIfOddPrime(i) && checkIfOddPrime(n - i)) {
+        for (int i = 3; i <= n / 2; i ++) {
+            if (checkIfPrime(i) && checkIfPrime(n - i)) {
                 System.out.println(i + " + " + (n - i));
             }
         }
     }
     
-    boolean checkIfOddPrime (int n) {
-        for (int i = 1; i < n; i++) {
+    boolean checkIfPrime (int n) {
+        for (int i = 2; i < n; i++) {
             if (n % i == 0) {
                 return false;
             }
@@ -30,9 +30,6 @@ class GoldbachPrinter {
         int n = sc.nextInt();
         
         GoldbachPrinter c = new GoldbachPrinter();
-        assert !c.checkIfOddPrime(2);
-        assert c.checkIfOddPrime(7);
-        assert !c.checkIfOddPrime(4);
-	    c.print(n);
+	c.print(n);
     }
 }
