@@ -1,11 +1,8 @@
 *.class
 *.ctxt
 *.defs
-*.bluej
 *.txt
 .git
-.project
-.classpath
 Main.java
 src/
 bin/
