@@ -1,0 +1,17 @@
+Step 01: Accept String variable n
+Step 02: Declare and set double variable dec to 0.0
+Step 03: Declare and set int variable j to n.indexOf(".")
+Step 04: Declare and set int variable length to n.length()
+Step 05: If j == -1:
+	Step 06: Set j to length - 1
+	Else:
+	Step 07: Set j to j - 1;
+Step 08: Declare and set int variable i to 0
+Step 09: If i < length, then:
+	Step 10: Declare and set char variable c to n.charAt(i)
+	Step 11: If c == '.':
+		Step 12: Set i to i + 1 and go to step 9
+	Step 13: Set dec to dec + Integer.parseInt(c + "") * Math.pow(2, j)
+	Step 14: Set j to j - 1
+	Step 15: Set i to i + 1 and go to step 9
+Step 16: Return dec

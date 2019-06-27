@@ -1,7 +1,6 @@
 *.class
 *.ctxt
 *.defs
-*.txt
 .git
 Main.java
 src/
