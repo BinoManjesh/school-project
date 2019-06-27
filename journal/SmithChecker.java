@@ -35,8 +35,6 @@ class SmithChecker {
         int n = sc.nextInt();
 
         SmithChecker c = new SmithChecker();
-        assert c.getSumOfDigits(26) == 8;
-        assert c.getSumOfDigits(2) == 2;
         System.out.println(c.check(n));
     }
 }
