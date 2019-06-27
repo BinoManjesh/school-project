@@ -3,7 +3,7 @@ package journal;
 import java.util.Scanner;
 
 /**
- * 4. Write a program to accept a number and print all the ways it can be expressed as a Goldbach number
+ * 4. Write a program to accept a number and print all the ways it can be expressed as a Goldbach number. A Goldbach number is a number that is the sum of two odd primes
  */ 
 class GoldbachPrinter {
 	

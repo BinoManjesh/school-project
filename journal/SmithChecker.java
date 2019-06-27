@@ -3,7 +3,8 @@ package journal;
 import java.util.Scanner;
 
 /**
- * 3. Write a program to accept a number and check if it is a Smith number
+ * 3. Write a program to accept a number and check if it is a Smith number. A Smith number is a number for which the sum of its digits is equal to the sum of the digits in its prime
+ * factorization. 
  */
 class SmithChecker {
 
