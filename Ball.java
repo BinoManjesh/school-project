@@ -12,13 +12,12 @@ class Ball extends Animation {
     @Override
     void render (float delta) {
         angle += velocity * delta;
-        // for (int i = 0; i < RADIUS * (1 + Math.sin(angle * Math.PI / 180)); i++) {
-            // System.out.println();
-        // }
-        // for (int i = 0; i < 2.5f * RADIUS * (1 + Math.cos(angle * Math.PI / 180)); i++) {
-            // System.out.print(" ");
-        // }
-        System.out.print(1 / delta);
+        for (int i = 0; i < RADIUS * (1 + Math.sin(angle * Math.PI / 180)); i++) {
+            System.out.println();
+        }
+        for (int i = 0; i < 2.5f * RADIUS * (1 + Math.cos(angle * Math.PI / 180)); i++) {
+            System.out.print(" ");
+        }
     }
     
     static void main() {

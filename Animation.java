@@ -16,16 +16,14 @@ abstract class Animation {
     }
 
     public void animate () {
-        // if (startTime == -1) {
-            // startTime = System.nanoTime();
-        // }
+        if (startTime == -1) {
+            startTime = System.nanoTime();
+        }
         while (true) {
             float delta;
-            // do {
+            do {
                 delta = (System.nanoTime() - startTime) * 1e-9f;
-            // } while (delta < MIN_DELTA);
-            if (delta < 0.016666668)
-                delta = delta;
+            } while (delta < MIN_DELTA);
             startTime = System.nanoTime();
             clearScreen();
             render(delta);
