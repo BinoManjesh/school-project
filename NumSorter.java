@@ -1,8 +1,17 @@
 import java.util.Scanner;
 
 class NumSorter {
-    
-    int sort (int n) {
+
+    public static void main() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        NumSorter s = new NumSorter();
+        System.out.println(s.sort(n));
+    }
+
+    int sort(int n) {
         int sorted = 0;
         while (n > 0) {
             int digit = n % 10;
@@ -19,14 +28,5 @@ class NumSorter {
             n /= 10;
         }
         return sorted;
-    }
-    
-    public static void main () {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a number: ");
-        int n = sc.nextInt();
-        
-        NumSorter s = new NumSorter();
-        System.out.println(s.sort(n));
     }
 }

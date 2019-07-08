@@ -6,8 +6,17 @@ import java.util.Scanner;
  * 1. Write a program to accept a binary number and convert it to decimal
  */
 class BinToDec {
-    
-    double getDec (String n) {
+
+    public static void main() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number in binary: ");
+        String n = sc.next();
+
+        BinToDec obj = new BinToDec();
+        System.out.println(n + " in decimal is: " + obj.getDec(n));
+    }
+
+    double getDec(String n) {
         double dec = 0.0;
         int j = n.indexOf(".");
         int length = n.length();
@@ -25,14 +34,5 @@ class BinToDec {
             j--;
         }
         return dec;
-    }
-    
-    public static void main () {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a number in binary: ");
-        String n = sc.next();
-        
-        BinToDec obj = new BinToDec();
-        System.out.println(n + " in decimal is: " + obj.getDec(n));
     }
 }

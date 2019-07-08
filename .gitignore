@@ -2,6 +2,6 @@
 *.ctxt
 *.defs
 .git
-Main.java
-src/
-bin/
+.idea
+*.iml
+package.bluej
