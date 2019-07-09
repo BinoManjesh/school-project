@@ -1,32 +1,43 @@
 package moving_ball;
 
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-class InputManager extends KeyAdapter {
-    
+public class InputManager extends KeyAdapter {
+
     private static InputManager instance = new InputManager();
-    
+
     private boolean[] keyPressed;
-    private boolean[] keyReleased;
-    
-    private InputManager () {
+
+    protected InputManager() {
         keyPressed = new boolean[256];
-        keyReleased = new boolean[256];
     }
-    
-    static InputManager getInstance() {
+
+    public static InputManager getInstance() {
         return instance;
     }
-    
+
     @Override
-    public void keyPressed (KeyEvent e) {
-        keyPressed[e.getKeyCode()] = true;
-        keyReleased[e.getKeyCode()] = false;
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode >= 0 && keyCode <= 256) {
+            keyPressed[keyCode] = true;
+        }
     }
-    
+
     @Override
-    public void keyReleased (KeyEvent e) {
-        keyReleased[e.getKeyCode()] = true;
-        keyPressed[e.getKeyCode()] = false;
+    public void keyReleased(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode >= 0 && keyCode <= 256) {
+            keyPressed[keyCode] = false;
+        }
+    }
+
+    public boolean getKeyPressed(int keyCode) {
+        if (keyCode >= 0 && keyCode <= 256) {
+            return keyPressed[keyCode];
+        } else {
+            return false;
+        }
     }
 }

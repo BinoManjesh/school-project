@@ -36,8 +36,8 @@ class Main extends Game {
     }
 
     @Override
-    protected void render(Graphics g) {
-        ball.render(g);
+    protected void draw(Graphics g) {
+        ball.draw(g);
         g.drawString("fps: " + fps, 0, 10);
     }
 }

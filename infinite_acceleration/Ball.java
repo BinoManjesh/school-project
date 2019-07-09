@@ -29,7 +29,7 @@ class Ball {
         }
     }
 
-    void render(Graphics g) {
+    void draw(Graphics g) {
         final int x = (int) (MOVEMENT_RADIUS + MOVEMENT_RADIUS * Math.sin(angle));
         final int y = (int) (MOVEMENT_RADIUS + MOVEMENT_RADIUS * Math.cos(angle));
         g.setColor(new Color(red, 0, 1 - red, 1));
