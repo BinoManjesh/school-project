@@ -1,5 +1,7 @@
 package moving_ball;
 
+import com.bino.game_lib.InputManager;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
