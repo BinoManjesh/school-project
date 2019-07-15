@@ -1,6 +1,8 @@
 package infinite_acceleration;
 
+import com.bino.game_lib.ExtendViewport;
 import com.bino.game_lib.Game;
+import com.bino.game_lib.Renderer;
 
 import java.awt.*;
 
@@ -10,6 +12,8 @@ class Main extends Game {
 
     private float fps;
     private Ball ball;
+    private ExtendViewport viewport;
+    private Renderer renderer;
 
     private Main() {
         super();
@@ -22,6 +26,9 @@ class Main extends Game {
 
         fps = 0;
         ball = new Ball();
+
+        viewport = new ExtendViewport(SCREEN_SIZE, SCREEN_SIZE);
+        renderer = new Renderer(viewport);
     }
 
     public static void main(String[] args) {
@@ -37,7 +44,13 @@ class Main extends Game {
 
     @Override
     protected void draw(Graphics g) {
-        ball.draw(g);
+        renderer.setG(g);
+        ball.draw(renderer);
         g.drawString("fps: " + fps, 0, 10);
+    }
+
+    @Override
+    public void whenResized(int screenWidth, int screenHeight) {
+        viewport.update(screenWidth, screenHeight);
     }
 }

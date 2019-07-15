@@ -1,18 +1,22 @@
 package moving_ball;
 
+import com.bino.game_lib.ExtendViewport;
 import com.bino.game_lib.Game;
 import com.bino.game_lib.InputManager;
+import com.bino.game_lib.Renderer;
 
 import java.awt.*;
 
 public class Main extends Game {
 
-    static final Color TEXT_COLOR = Color.BLACK;
-    private static final int SCREEN_SIZE = 500;
-    private static final Color BG_COLOR = Color.WHITE;
+    static final Color TEXT_COLOR = Color.WHITE;
+    private static final int SCREEN_SIZE = 1000;
+    private static final Color BG_COLOR = Color.BLACK;
 
     private float fps;
     private Ball ball;
+    private ExtendViewport viewport;
+    private Renderer renderer;
 
     private Main() {
         super();
@@ -20,15 +24,16 @@ public class Main extends Game {
         this.setBackground(BG_COLOR);
 
         frame.setTitle("Moving Ball");
-        frame.setPreferredSize(new Dimension(SCREEN_SIZE, SCREEN_SIZE));
-        frame.setMaximumSize(new Dimension(SCREEN_SIZE, SCREEN_SIZE));
-        frame.setMinimumSize(new Dimension(SCREEN_SIZE, SCREEN_SIZE));
         frame.setLocationRelativeTo(null);
         frame.addKeyListener(InputManager.getInstance());
 
         fps = 0;
 
         ball = new Ball();
+
+        viewport = new ExtendViewport(SCREEN_SIZE, SCREEN_SIZE);
+
+        renderer = new Renderer(viewport);
     }
 
     public static void main(String[] args) {
@@ -44,8 +49,14 @@ public class Main extends Game {
 
     @Override
     protected void draw(Graphics g) {
-        ball.draw(g);
+        renderer.setG(g);
+        ball.draw(renderer);
         g.setColor(TEXT_COLOR);
         g.drawString("fps: " + fps, 0, 10);
+    }
+
+    @Override
+    public void whenResized(int screenWidth, int screenHeight) {
+        viewport.update(screenWidth, screenHeight);
     }
 }

@@ -1,6 +1,7 @@
 package moving_ball;
 
 import com.bino.game_lib.InputManager;
+import com.bino.game_lib.Renderer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,32 +25,29 @@ class Ball {
     }
 
     void update(float delta) {
-        if (manager.getKeyPressed(KeyEvent.VK_RIGHT)) {
+        if (manager.isKeyPressed(KeyEvent.VK_RIGHT)) {
             x += SPEED * delta;
         }
-        if (manager.getKeyPressed(KeyEvent.VK_LEFT)) {
+        if (manager.isKeyPressed(KeyEvent.VK_LEFT)) {
             x -= SPEED * delta;
         }
-        if (manager.getKeyPressed(KeyEvent.VK_DOWN)) {
+        if (manager.isKeyPressed(KeyEvent.VK_DOWN)) {
             y += SPEED * delta;
         }
-        if (manager.getKeyPressed(KeyEvent.VK_UP)) {
+        if (manager.isKeyPressed(KeyEvent.VK_UP)) {
             y -= SPEED * delta;
         }
-        if (manager.getKeyPressed(KeyEvent.VK_Q)) {
+        if (manager.isKeyPressed(KeyEvent.VK_Q)) {
             size += SIZE_CHANGE_RATE * delta;
         }
-        if (manager.getKeyPressed(KeyEvent.VK_E)) {
+        if (manager.isKeyPressed(KeyEvent.VK_E)) {
             size -= SIZE_CHANGE_RATE * delta;
         }
     }
 
-    void draw(Graphics g) {
-        g.setColor(COLOR);
-        g.fillOval((int) (x - size / 2), (int) (y - size / 2), (int) size, (int) size);
-        g.setColor(Main.TEXT_COLOR);
-        g.drawString("x: " + x, 0, 20);
-        g.drawString("y: " + y, 0, 30);
-        g.drawString("size: " + size, 0, 40);
+    void draw(Renderer renderer) {
+        renderer.setColor(COLOR);
+        renderer.fillOval(x, y, size, size);
+        renderer.setColor(Main.TEXT_COLOR);
     }
 }

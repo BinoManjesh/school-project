@@ -1,10 +1,12 @@
 package infinite_acceleration;
 
+import com.bino.game_lib.Renderer;
+
 import java.awt.*;
 
 class Ball {
 
-    private static final float INIT_RPS = 20;
+    private static final float INIT_RPS = 0;
     private static final float RPS_INCREASE_RATE = 0.25f;
     private static final int MOVEMENT_RADIUS = 100;
     private static final int BALL_SIZE = 50;
@@ -29,12 +31,11 @@ class Ball {
         }
     }
 
-    void draw(Graphics g) {
+    void draw(Renderer renderer) {
         final int x = (int) (MOVEMENT_RADIUS + MOVEMENT_RADIUS * Math.sin(angle));
         final int y = (int) (MOVEMENT_RADIUS + MOVEMENT_RADIUS * Math.cos(angle));
-        g.setColor(new Color(red, 0, 1 - red, 1));
-        g.fillOval(x, y, BALL_SIZE, BALL_SIZE);
-        g.setColor(Color.BLACK);
-        g.drawString("rps: " + rps, 0, 20);
+        renderer.setColor(new Color(red, 0, 1 - red, 1));
+        renderer.fillOval(x, y, BALL_SIZE, BALL_SIZE);
+        renderer.setColor(Color.BLACK);
     }
 }
