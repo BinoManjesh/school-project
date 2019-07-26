@@ -1,3 +1,5 @@
+package journal;
+
 import java.util.Scanner;
 
 class NumSorter {
