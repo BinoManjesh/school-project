@@ -4,18 +4,19 @@ import java.util.Scanner;
 
 class Encryptor {
 
-    private String encrypt(String s, int n) {
-        String encrypted = "";
-        for(int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if(Character.isUpperCase(c)) {
-                int newC = ((int)c + n - 65) % 26;
+    private StringBuffer encrypt(String s, int n) {
+        StringBuffer encrypted = new StringBuffer(s);
+        for(int i = 0; i < encrypted.length(); i++) {
+            char c = encrypted.charAt(i);
+            if(Character.isLetter(c)) {
+                c = Character.toUpperCase(c);
+                int newC = ((int)c + n - 65) % 26 + 65;
+                if (newC < 65) {
+                    newC += 26;
+                }
+                c = (char)newC;
             }
-            else if(Character.isLowerCase(c)) {
-
-            } else {
-                encrypted += c;
-            }
+            encrypted.setCharAt(i, c);
         }
         return encrypted;
     }
