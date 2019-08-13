@@ -25,6 +25,9 @@ class Bar extends KeyAdapter {
     
     void update (float delta) {
         position.x += VELOCITY * dir * delta;
+        if (position.x < 0) {
+            
+        }
     }
     
     void paint (Graphics g) {
