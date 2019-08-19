@@ -1,9 +1,10 @@
+import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 class Bar extends KeyAdapter {
     
-    private static final int VELOCITY = 50;
+    private static final int VELOCITY = 500;
     private static final int WIDTH = 100;
     private static final int HEIGHT = 10;
     
@@ -24,6 +25,13 @@ class Bar extends KeyAdapter {
     
     void update (float delta) {
         position.x += VELOCITY * dir * delta;
+        if (position.x < 0) {
+            
+        }
+    }
+    
+    void paint (Graphics g) {
+        g.fillRect((int)position.x, (int)position.y, WIDTH, HEIGHT);
     }
     
     @Override
@@ -31,6 +39,7 @@ class Bar extends KeyAdapter {
         int keyCode = e.getKeyCode();
         
         if (keyCode == right) {
+            System.out.println("rihgt");
             dir = 1;
         } else if (keyCode == left) {
             dir = -1;
