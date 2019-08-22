@@ -8,4 +8,10 @@ class FlappyBirdGame extends Game {
     public void create() {
         setScreen(new GameScreen());
     }
+    
+    @Override
+    public void render() {
+    	System.out.println("Nain");
+    	super.render();
+    } 
 }

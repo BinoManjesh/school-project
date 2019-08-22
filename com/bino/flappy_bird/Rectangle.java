@@ -32,11 +32,10 @@ class Rectangle {
     }
     
     private boolean collidesInX(Rectangle rect) {
-        Gdx.app.log("Collision", "" + Math.abs(this.left - rect.right));
-        return Math.abs(this.left - rect.right) < this.width + rect.width;
+        return this.left < rect.right && rect.left < this.right;
     }
     
     private boolean collidesInY(Rectangle rect) {
-        return Math.abs(this.down - rect.up) < this.height + rect.height;
+        return this.down < rect.up && rect.down < this.up;
     }
 }
