@@ -1,19 +1,24 @@
 package com.bino.flappy_bird;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 class GameScreen extends ScreenAdapter {
 
-    static final int WIDTH = 6;
-    static final int HEIGHT = 4;
+    static final int WIDTH = 200;
+    static final int HEIGHT = 300;
+    static final float METRE = 100;
+    private static final Color BG_COLOR = Color.SKY;
 
-    private ShapeRenderer renderer;
+    private SpriteBatch batch;
     private Viewport viewport;
     private Camera camera;
     private Bird bird;
@@ -21,11 +26,13 @@ class GameScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        renderer = new ShapeRenderer();
-        viewport = new FillViewport(WIDTH, HEIGHT);
+        batch = new SpriteBatch();
+        viewport = new ExtendViewport(WIDTH, HEIGHT);
         camera = viewport.getCamera();
         bird = new Bird(HEIGHT / 2);
-        pipes = new Pipes(bird);
+        pipes = new Pipes(bird, viewport);
+        
+        Gdx.input.setInputProcessor(new InputManager());
     }
 
     @Override
@@ -35,24 +42,46 @@ class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         bird.update(delta);
         pipes.update();
-        camera.position.x = bird.pos.x + WIDTH / 4f;
+        if (bird.getY() <= 0) {
+        	bird = new Bird(HEIGHT / 2);
+        	pipes = new Pipes(bird, viewport);
+        }
+        camera.position.x = bird.getX() + viewport.getWorldWidth() / 4f;
 
         viewport.apply();
-        renderer.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(camera.combined);
 
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        pipes.render(renderer);
-        bird.render(renderer);
-        renderer.end();
+        batch.begin();
+        pipes.draw(batch);
+        bird.draw(batch);
+        batch.end();
     }
 
     @Override
     public void dispose() {
-        renderer.dispose();
+        batch.dispose();
+    }
+    
+    private class InputManager extends InputAdapter {
+    	
+    	@Override
+    	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    		bird.jump();
+    		
+    		return true;
+    	}
+    	
+    	@Override
+    	public boolean keyDown(int keycode) {
+    		if (keycode == Input.Keys.SPACE) {
+    			bird.jump();
+    		}
+    		
+    		return true;
+    	}
     }
 }
