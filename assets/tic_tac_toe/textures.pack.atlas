@@ -1,0 +1,76 @@
+
+textures.pack.png
+size: 128,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+grid
+  rotate: false
+  xy: 2, 42
+  size: 68, 68
+  orig: 68, 68
+  offset: 0, 0
+  index: -1
+human-v-bot
+  rotate: false
+  xy: 72, 79
+  size: 29, 17
+  orig: 29, 17
+  offset: 0, 0
+  index: -1
+human-v-human
+  rotate: false
+  xy: 2, 2
+  size: 29, 17
+  orig: 29, 17
+  offset: 0, 0
+  index: -1
+o
+  rotate: false
+  xy: 72, 57
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+o's-turn
+  rotate: false
+  xy: 2, 35
+  size: 52, 5
+  orig: 52, 5
+  offset: 0, 0
+  index: -1
+o-wins
+  rotate: false
+  xy: 72, 105
+  size: 52, 5
+  orig: 52, 5
+  offset: 0, 0
+  index: -1
+tie
+  rotate: false
+  xy: 2, 28
+  size: 52, 5
+  orig: 52, 5
+  offset: 0, 0
+  index: -1
+x
+  rotate: false
+  xy: 103, 76
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+x's-turn
+  rotate: false
+  xy: 72, 98
+  size: 52, 5
+  orig: 52, 5
+  offset: 0, 0
+  index: -1
+x-wins
+  rotate: false
+  xy: 2, 21
+  size: 52, 5
+  orig: 52, 5
+  offset: 0, 0
+  index: -1

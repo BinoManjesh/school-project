@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 class BinToDec {
 
-    public static void main() {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a number in binary: ");
         String n = sc.next();

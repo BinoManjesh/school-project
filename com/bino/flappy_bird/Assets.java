@@ -12,8 +12,8 @@ class Assets {
 	NinePatch pipe;
 	
 	private Assets () {
-		bird = new Texture(Gdx.files.internal("assets/bird.png"));
-		Texture pipeTex = new Texture(Gdx.files.internal("assets/pipe.png"));
+        bird = new Texture(Gdx.files.internal("assets/flappy_bird/bird.png"));
+        Texture pipeTex = new Texture(Gdx.files.internal("assets/flappy_bird/pipe.png"));
 		pipe = new NinePatch(pipeTex, 0, 0, 6, 6);
 	}
 	
