@@ -10,23 +10,22 @@ public class DecToBin {
 		float dec = sc.nextFloat();
 
 		DecToBin obj = new DecToBin();
-		System.out.println(obj.getBin(dec));
+        System.out.println(dec + " in binary is: " + obj.getBin(dec));
 	}
 
 	private float getBin(float dec) {
 		int iDec = (int) dec;
 		float fDec = dec - iDec;
-		int i = 1;
-		float ans = 0;
-		while (iDec > 0 || fDec > 0) {
-			ans += i * (iDec % 2);
+        StringBuffer bin = new StringBuffer(".");
+        while (iDec > 0) {
+            bin.insert(0, iDec % 2);
 			iDec /= 2;
-			i *= 10;
-
+        }
+        while (fDec > 0) {
 			fDec *= 2;
-			ans += ((int) fDec) / (float) i;
+            bin.append((int) fDec);
 			fDec = fDec - (int) fDec;
 		}
-		return ans;
+        return Float.valueOf(bin.toString());
 	}
 }

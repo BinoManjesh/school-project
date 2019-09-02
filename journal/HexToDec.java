@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 class HexToDec {
 
-    public static void main() {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a number in hexadecimal: ");
         String n = sc.next();
