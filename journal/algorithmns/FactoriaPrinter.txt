@@ -1,2 +1,6 @@
 Step 1: Start
-Step 2: For int i = 1; i < 1000; i++:
+Step 2: For int I = 1; I < 1000; I++:
+    a) Initialize double fact to 1
+    b) For int i = 1; i <= I; i++
+        Multiply fact by i
+Step 3: Print fact

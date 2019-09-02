@@ -14,9 +14,10 @@ class FactorialPrinter {
     }
 
     private double getFact(int n) {
-        if (n == 1) {
-            return 1;
+        double fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
         }
-        return n * getFact(n - 1);
+        return fact;
     }
 }

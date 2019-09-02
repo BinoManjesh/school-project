@@ -2,7 +2,7 @@ package journal;
 
 class HappyChecker {
 
-    int checkIsHappy(int n) {
+    private int checkIsHappy(int n) {
         if (n == 1) {
             return -1;
         }
@@ -10,7 +10,7 @@ class HappyChecker {
         return checkIsHappy(getSqSumOfDigits(n));
     }
 
-    int getSqSumOfDigits(int n) {
+    private int getSqSumOfDigits(int n) {
         int sum = 0;
         while(n > 0) {
             sum += n % 10;
