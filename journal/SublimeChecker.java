@@ -9,7 +9,12 @@ class SublimeChecker {
         System.out.print("Enter a number: ");
         int n = sc.nextInt();
         SublimeChecker c = new SublimeChecker();
-        System.out.println(c.isSublime(n));
+        if (c.isSublime(n)) {
+            System.out.println(n + " is sublime.");
+        } else {
+            System.out.println(n + " is not sublime.");
+        }
+
     }
 
     private boolean isSublime(int n) {

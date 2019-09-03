@@ -2,6 +2,7 @@ package journal;
 
 import java.util.Scanner;
 
+//TODO: algorithm
 class Encryptor {
 
     private StringBuffer encrypt(String s, int n) {

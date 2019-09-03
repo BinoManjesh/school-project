@@ -1,5 +1,8 @@
 package journal;
 
+import java.util.Scanner;
+
+//TODO: algorithm
 class HappyChecker {
 
     private int checkIsHappy(int n) {
@@ -19,7 +22,10 @@ class HappyChecker {
         return sum;
     }
 
-    public static void main(int n) {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        int n = sc.nextInt();
         HappyChecker c = new HappyChecker();
 
         try {

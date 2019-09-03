@@ -1,16 +1,12 @@
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 
 public class Life extends JPanel {
 
     private static final int PIXEL_SIZE = 5;
     private static final int WIDTH = 150 * PIXEL_SIZE;
     private static final int HEIGHT = 100 * PIXEL_SIZE;
-    private static final float GEN_TIME = 0.1f;
+    private static final float GEN_TIME = 1;
 
     private JFrame frame;
     private byte[][] thisCells;

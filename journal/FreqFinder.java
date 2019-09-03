@@ -2,8 +2,9 @@ package journal;
 
 import java.util.Scanner;
 
+//TODO: algorithm
 class FreqFinder {
-    
+
     int getFreq(String str, String subStr) {
         int freq = 0;
         int subLen = subStr.length();
@@ -14,14 +15,14 @@ class FreqFinder {
         }
         return freq;
     }
-    
+
     public static void main() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a string: ");
         String str = sc.nextLine();
         System.out.print("Enter a substring: ");
         String subStr = sc.nextLine();
-        
+
         FreqFinder obj = new FreqFinder();
         System.out.println(obj.getFreq(str, subStr));
     }

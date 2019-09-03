@@ -5,18 +5,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 class GameScreen extends ScreenAdapter {
 
     static final int WIDTH = 200;
     static final int HEIGHT = 300;
     static final float METRE = 100;
-    private static final Color BG_COLOR = Color.SKY;
 
     private SpriteBatch batch;
     private Viewport viewport;
