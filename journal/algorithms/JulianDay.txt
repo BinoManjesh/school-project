@@ -1,0 +1,22 @@
+Julian day to normal day:
+
+Step 1: Initialize constant int array DAYS to 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+Step 2: Accept int variables julianDay and year
+Step 3: Initialize int variable month to 0
+Step 4: Initialize boolean variable isLeapYear to true if year is divisible by 4
+Step 5: While julianDay - DAYS[month] > 0:
+	a) If isLeapYear && month == 1, subtract julianDay by 1
+	b) Subtract DAYS[month] to julianDay
+	c) Add 1 to month
+Step 6: Print julianDay + month + year
+Step 7: Stop
+
+Normal day to julian day:
+
+Step 1: Initialize constant int array DAYS to 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+Step 2: Accept int variables day, month and year
+Step 3: Subtract 2 from month
+Step 4: While month >= 0, add DAYS[month--] to julianDay
+Step 5: If year is divisible by 4, add 1 to julianDay
+Step 6: Print julianDay
+Step 7: Stop

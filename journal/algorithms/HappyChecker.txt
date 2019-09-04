@@ -1,0 +1,9 @@
+Step 1: Accept a number from the user and store it in n
+Step 2: If n is 1, print n "is happy" and go to step 7
+Step 3: Initialize int variable sum to 0
+Step 4: While n > 0, :
+	a) Add n % 10(first digit of n) to sum
+	b) Divide n by 10
+Step 5: Set n to sum
+Step 6: If number of recursions is not too much, go to step 2. Else go to step 7
+STep 7: Stop

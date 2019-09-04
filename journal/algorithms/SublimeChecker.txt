@@ -1,0 +1,8 @@
+Step 1: Accept a number from the user
+Step 2: Initialize int variable sum and noOfDivisors to 0
+Step 3: For int i = 1; i <= n; i++:
+	a) If n is divisible by i:
+		1) Add i to sum
+		2) Add 1 to noOfDivisors
+Step 4: If both sum and noOfDivisors are perfect numbers, print n "is sublime" else print n "is not sublime"
+Step 5: Stop	

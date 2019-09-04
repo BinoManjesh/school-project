@@ -1,0 +1,15 @@
+Step 1: Accept a number from the user ans store it in n
+Step 2: Initialize a StringBuffer object with the value of n
+Step 3: For int i = 0; i < smallest.length(); i++:
+	a) Initialize int variables min and minPos to the integer value of the first char of smallest and i respectively
+	b) For int j = i; j < smallest.length(); j++
+		1) Initialize int variable digit to the integer value of the ith character of smallest
+		2) If digit < min:
+			* Set min to digit
+			* Set minPos to j
+	c) Initialize char temp to the integer value of the ith character of smallest
+	d) Set the ith char of smallest to min
+	e) Set the minPosth char of smallest to temp
+Step 4: Print smallest
+Step 5: Print the reverse of smallest
+Step 6: Stop
