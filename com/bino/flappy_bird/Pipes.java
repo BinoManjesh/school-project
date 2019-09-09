@@ -45,10 +45,7 @@ class Pipes {
         	nearest = pipes.get(index);
         	index--;
         } else if (nearest.rect1.collides(bird.rect) || nearest.rect2.collides(bird.rect)) {
-        	bird.vel.x = 0;
-        	if (bird.vel.y > 0) {
-        		bird.vel.y = 0;
-        	}
+        	bird.kill();
         }
     }
     
