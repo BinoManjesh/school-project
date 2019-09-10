@@ -7,14 +7,13 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 class Assets {
 	
 	static Assets instance;
-	
-	Texture bird;
-	NinePatch pipe;
+
+    final Texture bird;
+    final NinePatch pipe;
 	
 	private Assets () {
-        bird = new Texture(Gdx.files.internal("assets/flappy_bird/bird.png"));
-        Texture pipeTex = new Texture(Gdx.files.internal("assets/flappy_bird/pipe.png"));
-		pipe = new NinePatch(pipeTex, 0, 0, 6, 6);
+        bird = new Texture(Gdx.files.internal("assets/bird.png"));
+        pipe = new NinePatch(new Texture(Gdx.files.internal("assets/pipe.png")), 0, 0, 6, 6);
 	}
 	
 	static void init() {

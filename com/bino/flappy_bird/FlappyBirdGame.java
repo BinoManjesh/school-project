@@ -2,21 +2,16 @@ package com.bino.flappy_bird;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 
 public class FlappyBirdGame extends Game {
-	
-	private static final Color BG_COLOR = Color.SKY;
+
+    static FlappyBirdGame game;
 
     @Override
     public void create() {
+        game = this;
     	Assets.init();
-    	Gdx.gl.glClearColor(BG_COLOR.r, BG_COLOR.g, BG_COLOR.b, BG_COLOR.a);
-        setScreen(new GameScreen());
+        Gdx.gl.glClearColor(Constants.BG_COLOR.r, Constants.BG_COLOR.g, Constants.BG_COLOR.b, Constants.BG_COLOR.a);
+        setScreen(new EvolutionScreen());
     }
-    
-    @Override
-    public void render() {
-    	super.render();
-    } 
 }

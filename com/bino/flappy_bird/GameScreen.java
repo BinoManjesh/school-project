@@ -3,65 +3,43 @@ package com.bino.flappy_bird;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.math.Rectangle;
 
-class GameScreen extends ScreenAdapter {
+class GameScreen extends MainScreen {
 
-    static final int WIDTH = 200;
-    static final int HEIGHT = 300;
-    static final float METRE = 100;
-
-    private SpriteBatch batch;
-    private Viewport viewport;
-    private Camera camera;
     private Bird bird;
-    private Pipes pipes;
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        viewport = new ExtendViewport(WIDTH, HEIGHT);
-        camera = viewport.getCamera();
-        bird = new Bird(HEIGHT / 2);
-        pipes = new Pipes(bird, viewport);
-        
+        super.show();
         Gdx.input.setInputProcessor(new InputManager());
+        init();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        viewport.update(width, height, true);
+    void init() {
+        super.init();
+        bird = new Bird(pipes);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         bird.update(delta);
-        pipes.update();
-        if (bird.getY() <= 0) {
-        	bird = new Bird(HEIGHT / 2);
-        	pipes = new Pipes(bird, viewport);
+        camera.position.x = bird.getX() + Constants.WORLD_WIDTH / 4f;
+        if (bird.alive) {
+            Rectangle rectangle = bird.getBoundingRectangle();
+            if (rectangle.overlaps(pipes.nearest.rect1) || rectangle.overlaps(pipes.nearest.rect2)) {
+                init();
+            }
+        } else {
+            init();
         }
-        camera.position.x = bird.getX() + viewport.getWorldWidth() / 4f;
-
-        viewport.apply();
-        batch.setProjectionMatrix(camera.combined);
-
-        batch.begin();
-        pipes.draw(batch);
-        bird.draw(batch);
-        batch.end();
+        super.render(delta);
     }
 
     @Override
-    public void dispose() {
-        batch.dispose();
+    protected void drawSprites(SpriteBatch batch) {
+        bird.draw(batch);
     }
     
     private class InputManager extends InputAdapter {
