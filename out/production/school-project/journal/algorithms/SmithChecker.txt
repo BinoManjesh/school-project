@@ -1,0 +1,21 @@
+boolean check:
+	Step 01: Accept int variable n
+	Step 02: Declare and set int variabe sumOfPrimes to 0
+	Step 03: Declare and set int variable c to n
+	Step 04: Declare and set int variable i to 2
+	Step 05: If i < c:
+		Step 06: If n % i == 0:
+			Step 07: Set n to n / i
+			Step 08: Set sumOfPrimes to sumOfPrimes + getSumOfDigits(i)
+			Step 09: Go to step 6
+		Step 10: Set i to i + 1 and go to step 05
+	Step 11: Return sumOfPrimes == getSumOfDigits(n)
+
+int getSumOfDigits:
+	Step 01: Accept int variable int n
+	Step 02: Declare and set int variable sum to 0
+	Step 03: If n > 0:
+		Step 04: Set sum to sum + n % 10
+		Step 05: Set n to n / 10
+		Step 06: Go to step 03
+	Step 07: Return sum

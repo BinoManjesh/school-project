@@ -1,0 +1,8 @@
+*.class
+*.ctxt
+*.defs
+.git
+.idea
+*.iml
+*.lnk
+package.bluej

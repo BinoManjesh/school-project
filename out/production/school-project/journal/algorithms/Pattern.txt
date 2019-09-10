@@ -1,0 +1,14 @@
+Pattern a:
+    Step 1: Start
+    Step 2: For int i = 1; i <= n; i++:
+        a) For int j = 0; j < n - i; j++:
+            Print " "
+        b) For int j = 1; j <= i; j++
+            Print j
+        c) Go to the next line
+
+Pattern b:
+    Step 1: For int i = n; i > 0; i--:
+        a) For int j = n; j > 0; j--:
+            1) If j < i, print i else print j
+        b) Go to the next line*

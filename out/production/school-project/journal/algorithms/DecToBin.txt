@@ -1,0 +1,13 @@
+Step 1: Start
+Step 2: Accept a number from the user and store it in dec
+Step 3: Store it's integer part in iDec and its fractional part in fDec
+Step 4: Initialize a new StringBuffer object bin to "."
+Step 5: While iDec > 0, do the following:-
+    a) Insert iDec % 2 to the left of bin
+    b) Divide iDec by 2
+Step 6: While fDec > 0, do the following:-
+    a) Multiply fDec by 2
+    b) Append the integer portion of fDec to the right of bin
+    c) Set fDec to its fractional part
+Step 7: Print bin
+STep 8: End
