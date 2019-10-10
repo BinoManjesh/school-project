@@ -9,6 +9,8 @@ public class Mutation
 {
     long a,b,c,d,e,f,g,h,a2,b2,c2,d2,e2,f2,g2,h2,chancnum,generationNumber;float rand;float speed,speedMultiplier; String s;
     String dot="0.0",chance; float roundOff; int mutationNumber,numberOfGens,numMuts,numNorms;float mutChance; static boolean isMutation,isInfinite; String generations;
+    
+    long startTime;
     void init(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter a Speed Multiplier");
@@ -69,6 +71,7 @@ public class Mutation
     void calc(){
         try{
             while(true){
+                startTime = System.nanoTime();
                 Thread.sleep((long)speed);
                 chancnum=(int)((Math.random()*100.0))%100;
                 chance=dot.concat(String.valueOf(chancnum));
@@ -212,6 +215,7 @@ public class Mutation
         System.out.println("Total generations:"+generationNumber);
         System.out.println("Normal generations:"+numNorms);
         System.out.println("Mutational generations:"+numMuts);
+        System.out.println((System.nanoTime() - startTime) * 1E-9);
     }
 
     public static void main(){
@@ -219,6 +223,7 @@ public class Mutation
         Mutation o=new Mutation();
         o.init();
         o.calc();
+        
         if(!(isInfinite)){
             o.results();
         }
