@@ -28,6 +28,7 @@ public class Pipes {
     }
 
     public void update(float width, float x) {
+        System.out.println(index);
         final float screenLeft = x - width / 2;
         final float screenRight = screenLeft + width;
         PipePair last = pipes.last();
@@ -44,8 +45,7 @@ public class Pipes {
 
         final float birdX = x - width / 4;
         if (nearest.x + GlobalConstants.PIPE_WIDTH < birdX) {
-            nearest = pipes.get(index);
-            index--;
+            nearest = pipes.get(--index);
             score++;
         }
     }

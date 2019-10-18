@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 class Encryptor {
-    //嘣밼Ც鹷绯鯨蠹Ჯ鑜蠼語誟
 
     private static final int A = 3;
     private static final int C = 4264;
