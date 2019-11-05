@@ -5,7 +5,7 @@ import java.awt.*;
 class WeirdCircle extends Canvas {
 
     private static final int SIZE = 512;
-    private static final int RECURSIONS = 3;
+    private static final int RECURSIONS = 8;
 
     public static void main(String[] args) {
         new WeirdCircle();

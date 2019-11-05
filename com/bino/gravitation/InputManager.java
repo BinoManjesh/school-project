@@ -94,6 +94,7 @@ class InputManager extends InputAdapter {
             satellite.velocity =
                     viewport.unproject(new Vector2(screenX, screenY)).sub(satellite.position).scl(VELOCITY_COEFFICIENT);
             System.out.println(satellite.velocity);
+            satellite.velocity.scl(-1);
             isDragging = false;
         }
 

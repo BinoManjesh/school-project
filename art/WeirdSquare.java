@@ -4,8 +4,8 @@ import java.awt.*;
 
 class WeirdSquare extends Canvas {
 
-    private static final int SIZE = 729;
-    private static final int RECURSIONS = 3;
+    private static final int SIZE = 343;
+    private static final int RECURSIONS = 5;
 
     private WeirdSquare() {
         super(SIZE, SIZE);
@@ -27,11 +27,11 @@ class WeirdSquare extends Canvas {
         }
         int newSize = size / 3;
         recursions--;
-        draw(x, y, newSize, recursions, graphics);
-        draw(x + newSize * 2, y, newSize, recursions, graphics);
-        draw(x + newSize * 2, y + newSize * 2, newSize, recursions, graphics);
-        draw(x + newSize, y + newSize, newSize, recursions, graphics);
-        draw(x, y + newSize * 2, newSize, recursions, graphics);
-        //        draw(x + newSize, y + newSize * 2, newSize, recursions, graphics);
+        for (int i = 0; i < 9; i++) {
+            if (i == 4) {
+                continue;
+            }
+            draw(x+ newSize*(i/3), y+newSize*(i%3), newSize, recursions, graphics);
+        }
     }
 }
