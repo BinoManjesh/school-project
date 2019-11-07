@@ -1,12 +1,11 @@
-class foo {
+class Foo {
     int[][] arr;
     
-    foo(int ) {
-        arr = new int[]
+    Foo(int a, int b) {
+        arr = new int[a][b];
     }
     
     public static void main() {
         
     }
-
 }
