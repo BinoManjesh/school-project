@@ -5,7 +5,7 @@ import java.awt.*;
 
 class Canvas extends JPanel {
     
-    private JFrame frame;
+    protected JFrame frame;
     
     Canvas() {
         setPreferredSize(new Dimension(512, 512));
