@@ -9,8 +9,8 @@ class Pendulum extends Game {
     Pendulum() {
         bob = new Bob(new Vector<Float>(200f, 0f), new Vector<Float>(300f, 0f));
     }
-    
-    public static void main() {
+
+    public static void main(String[] args) {
         Pendulum game = new Pendulum();
         game.start();
     }
