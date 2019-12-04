@@ -2,10 +2,12 @@ package art;
 
 class Sine extends Graph {
     
-    float T = 500;
+    Sine() {
+        super.xScale = 0.1f;
+    }
     
     @Override
-    float getY(float x) {
-        return (float)(Math.sin(2*Math.PI/T*x) + Math.cos(4*Math.PI/T*x) + Math.sin(8*Math.PI/T*x));
+    double getY(double x) {
+        return Math.sin(x) + Math.cos(x);
     }
 }

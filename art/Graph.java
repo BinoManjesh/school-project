@@ -14,7 +14,7 @@ abstract class Graph extends Canvas {
         super(width, height);
     }
     
-    abstract float getY(float x);
+    abstract double getY(double x);
     
     @Override
     public void paint(Graphics g) {
@@ -22,7 +22,7 @@ abstract class Graph extends Canvas {
         float t = 0;
         g.drawLine(0, (int)origin, width, (int)origin);
         while (t <= width) {
-            float y = origin + -yScale * getY(xScale*t);
+            float y = (float) (origin + -yScale * getY(xScale*t));
             g.drawOval((int)(t), (int)(y), 1, 1);
             t += dt;
         }
