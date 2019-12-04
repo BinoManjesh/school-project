@@ -1,13 +1,31 @@
-import java.util.*;
+package art;import java.util.*;import art.Graph;
 import javax.swing.*;
-public class graph extends JFrame
+public class dumb extends Graph
 {
+    double Y=0.0;
     static String xCO;static int xCo;static String yCO;static int yCo;
-    static void equation()
+    String h;int g=0;char sign=' ';
+    @Override
+    double getY(double x) { 
+         if(sign=='+')
+        {Y=(-1*(x*xCo))/yCo;}
+        
+         else
+         {Y=((x*xCo))/yCo;}
+
+        return Y;        
+        
+        
+    }
+    
+     void equation()
     {
+        super.xScale = 1;
+        super.yScale = 1;
         Scanner sc = new Scanner (System.in);
         System.out.println("enter the equation");
-        String h=sc.next();int g=0;char sign=' ';
+         h=sc.next();
+           int g=0;char sign=' ';
         for(int f=0;f<h.length();f++)
         {
             if(h.charAt(f)=='+' || h.charAt(f)=='+')
@@ -32,15 +50,9 @@ public class graph extends JFrame
             }
          
         }
-        double Y=0.0;
+        
         int X=1;
         
-        for( X=1;X<6;X++)
-        {if(sign=='+'){Y=(-1*(X*xCo))/yCo;}
-         else{Y=((X*xCo))/yCo;}
         
-        }
-        
-                
     }
 }

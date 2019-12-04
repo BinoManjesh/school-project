@@ -2,7 +2,7 @@ package art;
 
 import java.awt.Graphics;
 
-abstract class Graph extends Canvas {
+abstract public class Graph extends Canvas {
     
     static int width = 1000;
     static int height = 640;
