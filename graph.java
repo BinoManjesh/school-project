@@ -7,10 +7,13 @@ public class graph extends JFrame
     {
         Scanner sc = new Scanner (System.in);
         System.out.println("enter the equation");
-        String h=sc.next();int g=0;;
+        String h=sc.next();int g=0;char sign=' ';
         for(int f=0;f<h.length();f++)
         {
-          if(){}   
+            if(h.charAt(f)=='+' || h.charAt(f)=='+')
+            {sign='+';}
+            else if(h.charAt(f)=='-' || h.charAt(f)=='-')
+            {sign='-';}
             if(h.charAt(f)=='x' || h.charAt(f)=='X')
             {
               xCO=h.substring(0,f);
@@ -18,8 +21,6 @@ public class graph extends JFrame
               g=f;
               break;
             }
-           
-         
         }
         
         for(int f=0;f<h.length();f++)
@@ -27,10 +28,19 @@ public class graph extends JFrame
             {
               yCO=h.substring(g+2,f);
               yCo=Integer.parseInt(yCO);
-              break;
+             
             }
          
         }
-        System.out.println(xCo+" "+yCo);
+        double Y=0.0;
+        int X=1;
+        
+        for( X=1;X<6;X++)
+        {if(sign=='+'){Y=(-1*(X*xCo))/yCo;}
+         else{Y=((X*xCo))/yCo;}
+        
+        }
+        
+                
     }
 }
