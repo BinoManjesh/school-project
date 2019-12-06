@@ -4,47 +4,42 @@ import java.util.*;
 
 class BinSearcher {
     
-    int[] arr;
-    int key;
-    
-    BinSearcher() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the size of the array: ");
-        int n = sc.nextInt();
-        arr = new int[n];
-        System.out.println("Enter the sorted array elements:-");
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
-        System.out.println("Enter the ");
-    }
-    
-    void search(int key) {
-        int index = search(key, 0, arr.length() - 1);
-        if (index = -1) {
-            System.out.println(key + " not found.");
-        } else {
-            
-        }
-    }
-    
-    int search(int key, int start, int end) {
+    int search(int[] arr, int key, int start, int end) {
         if (end < start) {
-            return -1;
+            return 0;
         }
         int mid = (start + end) / 2;
         if (key < arr[mid]) {
-            return search(key, start, mid);
+            return search(arr, key, start, mid);
         } else if (arr[mid] < key) {
-            return search(key, mid + 1, end);
+            return search(arr, key, mid + 1, end);
         } else {
             return mid;
         }
     }
-
+    
+    void search(int[] arr, int key) {
+        int index = search(arr, key, 0, arr.length);
+        if (index == -1) {
+            System.out.println(key + " is not in the array.");
+        } else {
+            System.out.println(key + " is at " + index);
+        }
+    }
+    
     public static void main() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the size of the array: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the sorted array elements:-");
+        for (int i = 0; i < n; ++i) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.print("Enter the search element: ");
+        int key = sc.nextInt();
         
-        BinSearcher obj = new BinSearcher(n);
-        obj.accept(sc);
+        BinSearcher obj = new BinSearcher();
+        obj.search(arr, key);
     }
 }
