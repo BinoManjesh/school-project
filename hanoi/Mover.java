@@ -41,7 +41,11 @@ class Mover {
             stringBuffer.append(row);
             stringBuffer.append('\n');
         }
+        System.out.print('\u000C');
         System.out.println(stringBuffer);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
     }
 
     // Returns a stack that is not s1 or s2
