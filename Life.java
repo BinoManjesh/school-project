@@ -26,7 +26,7 @@ public class Life extends JPanel {
         thisCells = new byte[WIDTH / PIXEL_SIZE +  2][HEIGHT / PIXEL_SIZE + 2];
         for(int i = 1; i < thisCells.length - 1; i++) {
             for (int j = 1; j < thisCells[i].length - 1; j++) {
-                if (Math.random() < 0.5f) {
+                if (Math.random() < 0.1f) {
                     thisCells[i][j] = 1;
                 }
             }
