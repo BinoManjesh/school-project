@@ -4,46 +4,55 @@ import java.awt.*;
 
 class MandelbrodSet extends Canvas {
 
-    static final int width = 1000, height = 640, maxDivergence = 100;
-    int originX = width / 2, originY = height / 2;
+    static final int size = 500, maxDivergence = 100;
+    double scale = 4.0 / size;
+    double camX = 0, camY = 0;
     
     MandelbrodSet() {
-        super(width, height);
+        super(size, size);
+        super.frame.setResizable(false);
+        Zoomer zoomer = new Zoomer(this);
+        super.frame.addMouseListener(zoomer);
+        super.frame.addMouseWheelListener(zoomer);
     }
     
     @Override
     public void paint(Graphics g) {
-        g.drawLine(0, (int) originY, width, (int) originY);
-        g.drawLine((int) originX, height, (int) originX, 0);
         int x = 0, y = 0;
-        while (x <= width) {
+        while (x <= size) {
             x++;
-            while (y <= height) {
+            while (y <= size) {
                 y++;
-                Color color = getColor(originX - x, y - originY);
+                double x_ = (x  - size / 2.0) * scale + camX, y_ = (size / 2.0 - y) * scale + camY;
+                Color color = getColor(x_, y_);
                 g.setColor(color);
-                g.fillOval(x, y, 1, 1);
+                g.drawOval(x, y, 1, 1);
             }
             y = 0;
         }
     }
     
-    Color getColor(int x, int y) {
-        int foo = getDivergence(x, y) / maxDivergence * 16777216;
-        int r = foo % 
+    Color getColor(double x, double y) {
+        int foo = (int) ((double)getDivergence(x, y) / maxDivergence * 16777215);
+        int r = foo % 256;
+        foo /= 256;
+        int g = foo % 256;
+        foo /= 256;
+        int b = foo % 256;
+        return new Color(r, g, b, 255);
     }
     
-    int getDivergence(int x, int y) {
-        return getDivergence(x, y, maxDivergence + 1);
+    int getDivergence(double x, double y) {
+        return getDivergence(x, y, x, y, maxDivergence);
     }
     
-    int getDivergence(int x, int y, int i) {
-        if (i >= maxDivergence) {
+    int getDivergence(double x, double y, double cx, double cy, int i) {
+        if (i <= 0) {
             return 0;
         } else if (x*x + y*y > 4) {
             return i;
         } else {
-            return getDivergence(x, y, i - 1);
+            return getDivergence(x*x - y*y + cx, 2*x*y + cy, cx, cy, i - 1);
         }
     }
 }
