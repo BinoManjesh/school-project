@@ -6,8 +6,8 @@ abstract public class Graph extends Canvas {
     
     static int width = 1000;
     static int height = 640;
-    float xScale = 0.8f;
-    float yScale = 100;
+    float xScale = 1;
+    float yScale = 1;
     float dt = 0.001f;
     
     Graph() {
