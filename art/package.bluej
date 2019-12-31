@@ -2,6 +2,7 @@
 objectbench.height=184
 objectbench.width=1896
 package.divider.horizontal=0.6
+<<<<<<< HEAD
 package.divider.vertical=0.7983104540654699
 package.editor.height=749
 package.editor.width=1788
@@ -9,6 +10,15 @@ package.editor.x=0
 package.editor.y=0
 package.frame.height=1047
 package.frame.width=1936
+=======
+package.divider.vertical=0.7994186046511628
+package.editor.height=543
+package.editor.width=896
+package.editor.x=11
+package.editor.y=368
+package.frame.height=788
+package.frame.width=1044
+>>>>>>> 5163304bcb6a36d19aa90a69948f116b7c586d21
 package.numDependencies=0
 package.numTargets=11
 package.showExtends=true
