@@ -3,10 +3,9 @@ package art;
 import java.awt.*;
 
 abstract class Curve extends Canvas {
-    
-    static int width = 1000, height = 640;
-    double xScale = 1, yScale = 1;
-    double originX = width / 2, originY = height / 2;
+
+    private static int width = 1000, height = 640;
+    private double originX = width / 2.0, originY = height / 2.0;
     double d = 1;
     
     Curve() {

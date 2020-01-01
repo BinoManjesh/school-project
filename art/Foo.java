@@ -3,6 +3,7 @@ package art;
 class Foo extends Curve {
     
     Foo() {
+        d = 0.5;
     }
 
     @Override
