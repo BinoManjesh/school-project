@@ -4,9 +4,11 @@ import java.awt.*;
 
 class MandelbrodSet extends Canvas {
 
-    static final int size = 250, maxDivergence = 1000;
+    static final int size = 200, maxDivergence = 100;
     double scale = 4.0 / size;
-    double camX = 0, camY = 0;
+    double camX = -1.9854737218475564, camY = -1.92962847813101E-5;
+    //-1.9825307442357645 1.1269861165180146E-16
+    //-1.9854737218475564 -1.92962847813101E-5
     
     MandelbrodSet() {
         super(size, size);

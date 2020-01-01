@@ -17,6 +17,7 @@ class Zoomer extends MouseAdapter {
         int x = e.getX(), y = e.getY();
         obj.camX = obj.camX + (x - obj.size / 2.0) * obj.scale;
         obj.camY = obj.camY + (obj.size / 2.0 - y) * obj.scale;
+        System.out.println(obj.camX + " " + obj.camY);
         obj.repaint();
     }
     
