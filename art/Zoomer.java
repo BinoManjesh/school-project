@@ -6,18 +6,18 @@ import java.awt.event.*;
 class Zoomer extends MouseAdapter {
     
     static final double speed = 0.9;
-    MandelbrodSet obj;
+    MandelbrotSet obj;
     
-    Zoomer(MandelbrodSet obj) {
+    Zoomer(MandelbrotSet obj) {
         this.obj = obj;
     }
     
     @Override
     public void mousePressed(MouseEvent e) {
-        int x = e.getX(), y = e.getY();
+        int x = e.getX() - 8, y = e.getY() - 31;
         obj.camX = obj.camX + (x - obj.size / 2.0) * obj.scale;
         obj.camY = obj.camY + (obj.size / 2.0 - y) * obj.scale;
-        System.out.println(obj.camX + " " + obj.camY);
+        System.out.println(x + " " + y);
         obj.repaint();
     }
     
