@@ -2,12 +2,13 @@ package art;
 
 import java.awt.*;
 
-class MandelbrotSet extends Canvas {
+class MandelbrotSet extends Canvas implements Zoomable {
 
-    static final int size = 500;
-    private static final int maxDivergence = 50;
-    double scale = 4.0 / size;
-    double camX = -0.7264926148300772, camY = -0.25148380542817095;
+    private static final int size = 200;
+    private static final int maxDivergence = 6000;
+    private double scale = 4.0 / size;
+    private double camX = -1.7490812690237831, camY = -4.9135633356879E-6;
+
     //-1.9825307442357645 1.1269861165180146E-16
     //-1.9854737218475564 -1.92962847813101E-5
     //-1.9854736614426023 -1.9321688831440083E-5
@@ -45,7 +46,7 @@ class MandelbrotSet extends Canvas {
         g.setColor(Color.BLACK);
         g.drawString((scale * size) + "", 0, 10);
         g.setColor(Color.RED);
-        int radius = 5;
+        final int radius = 5;
         g.drawOval((int)(size/2.0 - radius), (int)(size/2.0 - radius), radius * 2, radius * 2);
     }
 
@@ -71,5 +72,31 @@ class MandelbrotSet extends Canvas {
         } else {
             return getDivergence(x*x - y*y + cx, 2*x*y + cy, cx, cy, i - 1);
         }
+    }
+
+    @Override
+    public void setCam(double camX, double camY) {
+        this.camX = camX;
+        this.camY = camY;
+    }
+
+    @Override
+    public double getCamX() {
+        return camX;
+    }
+
+    @Override
+    public double getCamY() {
+        return camY;
+    }
+
+    @Override
+    public double getScale() {
+        return scale;
+    }
+
+    @Override
+    public void setScale(double scale) {
+        this.scale = scale;
     }
 }
