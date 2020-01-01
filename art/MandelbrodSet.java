@@ -4,7 +4,7 @@ import java.awt.*;
 
 class MandelbrodSet extends Canvas {
 
-    static final int size = 500, maxDivergence = 100;
+    static final int size = 250, maxDivergence = 1000;
     double scale = 4.0 / size;
     double camX = 0, camY = 0;
     
@@ -30,6 +30,8 @@ class MandelbrodSet extends Canvas {
             }
             y = 0;
         }
+        g.setColor(Color.BLACK);
+        g.drawString((scale * size) + "", 0, 10);
     }
     
     Color getColor(double x, double y) {

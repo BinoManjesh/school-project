@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 class Zoomer extends MouseAdapter {
     
-    static final double speed = 0.05;
+    static final double speed = 0.9;
     MandelbrodSet obj;
     
     Zoomer(MandelbrodSet obj) {
@@ -22,7 +22,12 @@ class Zoomer extends MouseAdapter {
     
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        obj.scale = (obj.scale * obj.size + speed * e.getPreciseWheelRotation()) / obj.size;
+        int scroll = e.getWheelRotation();
+        if (scroll > 0) {
+            obj.scale *= speed;
+        } else {
+            obj.scale /= speed;
+        }
         obj.repaint();
     }
 }
