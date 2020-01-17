@@ -17,12 +17,12 @@ abstract class Curve extends Canvas implements Zoomable {
     @Override
     public void paint(Graphics g) {
         g.drawLine(0, height / 2, width, height / 2);
-        g.drawLine(width / 2, height, (int) originX, 0);
+        g.drawLine(width / 2, height, 5, 0);
         int x, y = 0;
         while (y < height) {
             x = 0;
             while (x < width) {
-                if (isPoint(originX - x, y - originY)) {
+                if (isPoint(-x, y)) {
                     g.drawOval(x, y, 1, 1);
                 }
             }

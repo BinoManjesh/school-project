@@ -4,8 +4,8 @@ import java.awt.*;
 
 class MandelbrotSet extends Canvas implements Zoomable {
 
-    private static final int size = 200;
-    private static final int maxDivergence = 6000;
+    private static final int size = 250;
+    private static final int maxDivergence = 1000;
     private double scale = 4.0 / size;
     private double camX = -1.7490812690237831, camY = -4.9135633356879E-6;
 
