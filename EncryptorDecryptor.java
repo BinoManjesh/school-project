@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 class EncryptorDecryptor {
 
@@ -19,36 +20,36 @@ class EncryptorDecryptor {
                 sc.nextLine();
                 String str, encrypted;
                 int key1, key2;
-                switch(ch) {
+                switch (ch) {
                     case 1:
-                    System.out.println("ENTER THE STRING");
-                    str = sc.nextLine();
-                    key1 = obj.getRandomKey();
-                    key2 = obj.getRandomKey();
-                    encrypted = obj.encrypt(str, key1, key2);
-                    System.out.println("THE ENCRYPTED TEXT:-");
-                    System.out.println(encrypted);
-                    System.out.println("KEY 1: " + key1);
-                    System.out.println("KEY 2: " + key2);
-                    break;
+                        System.out.println("ENTER THE STRING");
+                        str = sc.nextLine();
+                        key1 = obj.getRandomKey();
+                        key2 = obj.getRandomKey();
+                        encrypted = obj.encrypt(str, key1, key2);
+                        System.out.println("THE ENCRYPTED TEXT:-");
+                        System.out.println(encrypted);
+                        System.out.println("KEY 1: " + key1);
+                        System.out.println("KEY 2: " + key2);
+                        break;
                     case 2:
-                    System.out.println("ENTER THE STRING");
-                    encrypted = sc.nextLine();
-                    System.out.print("ENTER KEY 1: ");
-                    key1 = sc.nextInt();
-                    System.out.print("ENTER KEY 2: ");
-                    key2 = sc.nextInt();
-                    str = obj.decrypt(encrypted, key1, key2);
-                    System.out.println("THE DECRYPTED TEXT:-");
-                    System.out.println(str);
-                    break;
+                        System.out.println("ENTER THE STRING");
+                        encrypted = sc.nextLine();
+                        System.out.print("ENTER KEY 1: ");
+                        key1 = sc.nextInt();
+                        System.out.print("ENTER KEY 2: ");
+                        key2 = sc.nextInt();
+                        str = obj.decrypt(encrypted, key1, key2);
+                        System.out.println("THE DECRYPTED TEXT:-");
+                        System.out.println(str);
+                        break;
                     case 0:
-                    end = true;
-                    printFormatted("");
-                    printFormatted("THANK YOU FOR USING THIS PROGRAM");
-                    break;
+                        end = true;
+                        printFormatted("");
+                        printFormatted("THANK YOU FOR USING THIS PROGRAM");
+                        break;
                     default:
-                    System.out.println("PLEASE ENTER ONLY 0, 1 OR 2");
+                        System.out.println("PLEASE ENTER ONLY 0, 1 OR 2");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("YOU MAY HAVE ENTERED A STRING WHERE A NUMBER WAS EXPECTED");
@@ -74,7 +75,7 @@ class EncryptorDecryptor {
     }
 
     private int getRandomKey() {
-        return (int) (Math.random() * 100);
+        return (int) (Math.random() * 512) - 256;
     }
 
     private String encrypt(String str, int key1, int key2) {
@@ -87,10 +88,10 @@ class EncryptorDecryptor {
         return encrypted.toString();
     }
 
-    private String decrypt(String encrypted, int key1, int key2) {
+    private String decrypt(String str, int key1, int key2) {
         StringBuffer decrypted = new StringBuffer();
-        for (int i = 0; i < encrypted.length(); i++) {
-            char c = encrypted.charAt(i);
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
             char oldC = (char) ((int) Math.sqrt(c - key1 - i * key2));
             decrypted.append(oldC);
         }
