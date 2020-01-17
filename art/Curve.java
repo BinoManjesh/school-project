@@ -2,33 +2,57 @@ package art;
 
 import java.awt.*;
 
-abstract class Curve extends Canvas {
-    
-    static int width = 1000, height = 640;
-    double xScale = 1, yScale = 1;
-    double originX = width / 2, originY = height / 2;
-    double d = 1;
-    
+abstract class Curve extends Canvas implements Zoomable {
+
+    private static int width = 1000, height = 640;
+    private double camX = 0, camY = 0;
+    private double scale;
+
     Curve() {
         super(width, height);
     }
-    
+
     abstract boolean isPoint(double x, double y);
-    
+
     @Override
     public void paint(Graphics g) {
-        g.drawLine(0, (int) originY, width, (int) originY);
-        g.drawLine((int) originX, height, (int) originX, 0);
-        double x = 0, y = 0;
-        while (x <= width) {
-            x += d;
-            while (y <= height) {
-                y += d;
+        g.drawLine(0, height / 2, width, height / 2);
+        g.drawLine(width / 2, height, (int) originX, 0);
+        int x, y = 0;
+        while (y < height) {
+            x = 0;
+            while (x < width) {
                 if (isPoint(originX - x, y - originY)) {
-                    g.drawOval((int) (x), (int) (y), 1, 1);
+                    g.drawOval(x, y, 1, 1);
                 }
             }
             y = 0;
         }
+    }
+
+    @Override
+    public void setCam(double camX, double camY) {
+        this.camX = camX;
+        this.camY = camY;
+    }
+
+    @Override
+    public double getCamX() {
+        return camX;
+    }
+
+    @Override
+    public double getCamY() {
+        return camY;
+    }
+
+    @Override
+    public double getScale() {
+        return scale;
+    }
+
+    @Override
+    public void setScale(double scale) {
+        this.scale = scale;
     }
 }

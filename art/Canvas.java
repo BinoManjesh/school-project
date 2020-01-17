@@ -3,12 +3,14 @@ package art;
 import javax.swing.*;
 import java.awt.*;
 
-class Canvas extends JPanel {
+abstract class Canvas extends JPanel {
     
     protected JFrame frame;
     
     Canvas() {
         setPreferredSize(new Dimension(512, 512));
+        setMaximumSize(new Dimension(512, 512));
+        setMinimumSize(new Dimension(512, 512));
         frame = new JFrame();
         frame.add(this);
         frame.pack();
@@ -20,7 +22,9 @@ class Canvas extends JPanel {
 
     Canvas(int width, int height) {
         this();
-        setPreferredSize(new Dimension(width, height));
+        this.setPreferredSize(new Dimension(width, height));
+        this.setMaximumSize(new Dimension(width, height));
+        this.setMinimumSize(new Dimension(width, height));
         frame.pack();
     }
 }
