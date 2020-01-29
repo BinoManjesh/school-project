@@ -66,7 +66,6 @@ public class Life extends JPanel {
             }
         }
     }
-
     void start() {
         float elapsedTime = 0;
         long startTime = System.nanoTime();

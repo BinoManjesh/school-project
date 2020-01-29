@@ -2,19 +2,20 @@ package art;
 
 interface Zoomable {
     
-    double getCamX();
+    public void setCam(double camX, double camY);
     
-    double getCamY();
+    public double getCamX();
     
-    void setCam(double camX, double camY);
+    public double getCamY();
     
-    double getScale();
+    public double getScale();
     
-    void setScale(double scale);
+    public void setScale(double scale);
     
-    int getWidth();
+    public int getWidth();
     
-    int getHeight();
+    public int getHeight();
     
-    void repaint();
+    public void repaint();
+    public void validate();
 }

@@ -4,32 +4,39 @@ import java.awt.*;
 
 abstract class Curve extends Canvas implements Zoomable {
 
-    private static int width = 1000, height = 640;
+    private static int width = 250, height = 250;
     private double camX = 0, camY = 0;
-    private double scale;
+    private double scale = 1;
 
     Curve() {
         super(width, height);
+        Zoomer zoomer = new Zoomer(this);
+        super.frame.addMouseListener(zoomer);
+        super.frame.addMouseWheelListener(zoomer);
     }
 
     abstract boolean isPoint(double x, double y);
 
     @Override
-    public void paint(Graphics g) {
-        g.drawLine(0, height / 2, width, height / 2);
-        g.drawLine(width / 2, height, 5, 0);
+    public void paintComponent(Graphics g) {
+        System.out.println("Started");
+        g.setColor(Color.BLACK);
         int x, y = 0;
         while (y < height) {
             x = 0;
             while (x < width) {
-                if (isPoint(-x, y)) {
+                double x_ = camX + (x  - width / 2.0) * scale, y_ = camY + (height / 2.0 - y) * scale;
+                if (isPoint(x_, y_)) {
                     g.drawOval(x, y, 1, 1);
                 }
+                x++;
             }
-            y = 0;
+            y++;
         }
+        System.out.println("Painted");
+        g.drawLine(0, 0, width, height);
     }
-
+    
     @Override
     public void setCam(double camX, double camY) {
         this.camX = camX;
@@ -54,5 +61,15 @@ abstract class Curve extends Canvas implements Zoomable {
     @Override
     public void setScale(double scale) {
         this.scale = scale;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 }

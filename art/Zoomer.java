@@ -21,6 +21,7 @@ class Zoomer extends MouseAdapter {
         obj.setCam(camX, camY);
         System.out.println(obj.getCamX() + " " + obj.getCamX());
         obj.repaint();
+        obj.validate();
     }
 
     @Override
@@ -32,5 +33,6 @@ class Zoomer extends MouseAdapter {
             obj.setScale(obj.getScale() / speed);
         }
         obj.repaint();
+        obj.validate();
     }
 }

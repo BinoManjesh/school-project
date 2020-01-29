@@ -16,7 +16,7 @@ class MandelbrotSet extends Canvas implements Zoomable {
     //-1.7490812690237831 -4.9135633356879E-6
     //-1.40881256903367 -0.1327512339998311
     //-0.7264926148300772 -0.25148380542817095
-    
+
     MandelbrotSet() {
         super(size, size);
         super.frame.setResizable(false);
@@ -28,7 +28,7 @@ class MandelbrotSet extends Canvas implements Zoomable {
     public static void main(String[] args) {
         new MandelbrotSet();
     }
-    
+
     @Override
     public void paint(Graphics g) {
         int x, y = 0;
@@ -98,5 +98,15 @@ class MandelbrotSet extends Canvas implements Zoomable {
     @Override
     public void setScale(double scale) {
         this.scale = scale;
+    }
+
+    @Override
+    public int getWidth() {
+        return size;
+    }
+
+    @Override
+    public int getHeight() {
+        return size;
     }
 }
