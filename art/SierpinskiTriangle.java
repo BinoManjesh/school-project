@@ -20,10 +20,10 @@ class SierpinskiTriangle extends Canvas {
         if (recursions == 1) {
             g.fillRect(x, y, size, size);
         } else {
-            int newSize = size/2;
-            draw(x, y, newSize, g, recursions-1);
-            draw(x + newSize, y, newSize, g, recursions-1);
-            draw(x, y + newSize, newSize, g, recursions-1);
+            int newSize = size / 2;
+            draw(x, y, newSize, g, recursions - 1);
+            draw(x + newSize, y, newSize, g, recursions - 1);
+            draw(x, y + newSize, newSize, g, recursions - 1);
         }
     }
 }

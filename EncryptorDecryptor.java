@@ -55,7 +55,7 @@ class EncryptorDecryptor {
                 System.out.println("YOU MAY HAVE ENTERED A STRING WHERE A NUMBER WAS EXPECTED");
                 sc = new Scanner(System.in);
             } catch (Exception e) {
-                System.out.println("AN UNKNOWN ERROR HAS OCCURED");
+                System.out.println("AN UNKNOWN ERROR HAS OCCURRED");
             }
             printFormatted("");
         }

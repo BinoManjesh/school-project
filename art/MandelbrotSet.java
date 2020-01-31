@@ -30,7 +30,7 @@ class MandelbrotSet extends Canvas implements Zoomable {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         int x, y = 0;
         while (y < size) {
             x = 0;

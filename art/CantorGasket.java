@@ -2,17 +2,17 @@ package art;
 
 import java.awt.*;
 
-class WeirdSquare extends Canvas {
+class CantorGasket extends Canvas {
 
     private static final int SIZE = 343;
     private static final int RECURSIONS = 5;
 
-    private WeirdSquare() {
+    private CantorGasket() {
         super(SIZE, SIZE);
     }
 
     public static void main(String[] args) {
-        new WeirdSquare();
+        new CantorGasket();
     }
 
     @Override
@@ -31,7 +31,7 @@ class WeirdSquare extends Canvas {
             if (i == 4) {
                 continue;
             }
-            draw(x+ newSize*(i/3), y+newSize*(i%3), newSize, recursions, graphics);
+            draw(x + newSize * (i / 3), y + newSize * (i % 3), newSize, recursions, graphics);
         }
     }
 }
