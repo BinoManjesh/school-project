@@ -5,7 +5,7 @@ import java.awt.*;
 class CantorGasket extends Canvas {
 
     private static final int SIZE = 343;
-    private static final int RECURSIONS = 5;
+    private static final int RECURSIONS = 2;
 
     private CantorGasket() {
         super(SIZE, SIZE);
