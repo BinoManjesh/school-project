@@ -1,13 +1,13 @@
 package art;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
+import java.awt.event.*;
 
-abstract class Plot extends Canvas {
+abstract class Plot extends Canvas implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
-    protected double camX = 0, camY = 0, scale = 1;
+    static double scaleSpeed = 0.9;
+    double camX = 0, camY = 0, scale = 1;
+    private double prevX, prevY;
 
     Plot() {
         init();
@@ -21,10 +21,10 @@ abstract class Plot extends Canvas {
     abstract Color getColor(double x, double y);
 
     private void init() {
-        MouseInput min = new MouseInput();
-        super.frame.addMouseListener(min);
-        super.frame.addMouseMotionListener(min);
-        super.frame.addMouseWheelListener(min);
+        super.frame.addMouseListener(this);
+        super.frame.addMouseMotionListener(this);
+        super.frame.addMouseWheelListener(this);
+        super.frame.addKeyListener(this);
     }
 
     @Override
@@ -47,39 +47,56 @@ abstract class Plot extends Canvas {
         g.drawOval(width / 2 - radius, height / 2 - radius, radius * 2, radius * 2);
     }
 
-    class MouseInput extends MouseAdapter {
+    @Override
+    public void mouseClicked(MouseEvent e) {}
 
-        private static final double speed = 0.9;
-
-        double prevX, prevY;
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            prevX = e.getX();
-            prevY = e.getY();
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent e) {
-            double currentX = e.getX(), currentY = e.getY();
-            double deltaX = currentX - prevX;
-            double deltaY = prevY - currentY;
-            camX -= deltaX * scale;
-            camY -= deltaY * scale;
-            prevX = currentX;
-            prevY = currentY;
-            repaint();
-        }
-
-        @Override
-        public void mouseWheelMoved(MouseWheelEvent e) {
-            int scroll = e.getWheelRotation();
-            if (scroll > 0) {
-                scale *= speed;
-            } else {
-                scale /= speed;
-            }
-            repaint();
-        }
+    @Override
+    public void mousePressed(MouseEvent e) {
+        prevX = e.getX();
+        prevY = e.getY();
     }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        double currentX = e.getX(), currentY = e.getY();
+        double deltaX = currentX - prevX;
+        double deltaY = prevY - currentY;
+        camX -= deltaX * scale;
+        camY -= deltaY * scale;
+        prevX = currentX;
+        prevY = currentY;
+        repaint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {}
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int scroll = e.getWheelRotation();
+        if (scroll > 0) {
+            scale *= scaleSpeed;
+        } else {
+            scale /= scaleSpeed;
+        }
+        repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 }

@@ -1,16 +1,16 @@
 package art;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 class MandelbrotSet extends Plot {
 
-    private static final int size = 600;
-    private static final int maxDivergence = 500;
+    private int maxDivergence = 1001;
 
     MandelbrotSet() {
-        super(size, size);
+        super(250, 250);
         //scale, camX, camY are variables inherited from Plot
-        scale = 4.0 / size;
+        scale = 4.0 / 250;
         camX = -1.7490812690237831;
         camY = -4.9135633356879E-6;
     }
@@ -32,8 +32,28 @@ class MandelbrotSet extends Plot {
     }
 
     @Override
+    public void keyPressed(KeyEvent e) {
+        char ch = e.getKeyChar();
+        switch (ch) {
+            case 'q':
+                maxDivergence++;
+                repaint();
+                break;
+            case 'e':
+                maxDivergence--;
+                repaint();
+                break;
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+
+    @Override
     Color getColor(double x, double y) {
-        int foo = (int) ((double)getDivergence(x, y) / maxDivergence * 16777215);
+        int foo = (int) ((double) getDivergence(x, y) / maxDivergence * 16777215);
         int r = foo % 256;
         foo /= 256;
         int g = foo % 256;
@@ -42,38 +62,33 @@ class MandelbrotSet extends Plot {
         return new Color(r, g, b, 255);
     }
 
-    private int getDivergence(double x, double y) {
-        return getDivergence(x, y, x, y, maxDivergence);
-    }
-
     /**
-     * @param x the real part of the number
-     * @param y the imaginary part of the number
-     * @param cx the real part of the complex number c
-     * @param cy the imaginary part of the complex number c
-     * @param i the number of iterations left
-     * @return the number of iterations for the number x + yi to become greater than 2 (by magnitude)
+     * @param cx the real part of the number
+     * @param cy the imaginary part of the number
+     * @return the number of iterations for the number's magnitude to become larger than 2
      */
-    private int getDivergence(double x, double y, double cx, double cy, int i) {
-        if (i <= 0) {
-            return 0;
-        }
-        //Checks if the square of the magnitude of the number is greater than 4 since sqrt is slower
-        else if (x * x + y * y > 4) {
-            return i;
-        } else {
-            /*
-            For a real number:-
-            Zn = Zn-1^2 + c
+    private int getDivergence(double cx, double cy) {
+        double zx = cx, zy = cy;
+        for (int i = 1; i <= maxDivergence; ++i) {
+            //Checks if the square of the magnitude of the number is greater than 4 since sqrt is slower
+            if (zx * zx + zy * zy > 4) {
+                return maxDivergence - i + 1;
+            } else {
+                /*
+                For a real number:-
+                Zn = Zn-1^2 + c
 
-            For a complex number:-
-            Zn = (x + yi)^2 + cx + cyi
-               = x^2 - y^2 + 2xyi + cx + cyi
-               = (x^2 - y^2 + cx) + (2xy + cy)i
-             */
-            double new_x = x * x - y * y + cx;
-            double new_y = 2 * x * y + cy;
-            return getDivergence(new_x, new_y, cx, cy, i - 1);
+                For a complex number:-
+                Zn = (x + yi)^2 + cx + cyi
+                   = x^2 - y^2 + 2xyi + cx + cyi
+                   = (x^2 - y^2 + cx) + (2xy + cy)i
+                 */
+                double new_zx = zx * zx - zy * zy + cx;
+                double new_zy = 2 * zx * zy + cy;
+                zx = new_zx;
+                zy = new_zy;
+            }
         }
+        return 0;
     }
 }
