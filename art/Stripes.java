@@ -9,6 +9,11 @@ class Stripes extends Plot {
 
     private float i = 0, j = 0;
 
+    private Stripes() {
+        camX = Math.PI;
+        camY = Math.PI;
+    }
+
     public static void main(String[] args) {
         new Stripes();
     }
