@@ -7,8 +7,10 @@ class Bob {
     static double centerX, centerY;
     static double radius;
     static double size;
+
     double theta;
     double omega;
+
     private Color color;
 
     Bob(Color color) {
