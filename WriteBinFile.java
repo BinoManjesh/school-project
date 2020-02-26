@@ -1,11 +1,13 @@
 import java.io.*;
 
-class BinaryFileOut {
+class WriteBinFile {
     
     public static void main() throws IOException {
         FileOutputStream fout = new FileOutputStream("jeff.bin");
         DataOutputStream dout = new DataOutputStream(fout);
-        dout.writeChar('f');
+        for (int i = 0; i < 10; ++i) {
+            dout.writeInt(i);
+        }
         dout.close();
         fout.close();
     }
