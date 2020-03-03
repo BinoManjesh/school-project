@@ -9,7 +9,7 @@ class Cool extends Plot {
     double moe = 0.1;
 
     @Override Color getColor(double x, double y) {
-        if (abs(sin(y * sin(x))) < moe * scale) {
+        if (abs(sin(y * sin(x))) < 10e-17) {
             return Color.BLACK;
         } else {
             return null;
