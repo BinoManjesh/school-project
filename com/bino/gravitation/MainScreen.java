@@ -3,62 +3,64 @@ package com.bino.gravitation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.ArrayList;
 
 class MainScreen extends ScreenAdapter {
 
-    static final float METRE = 1.563e-6f;
-    private static final int INIT_WORLD_SIZE = 250;
-    private static final Color BG = Color.SKY;
+    private static final int WORLD_SIZE = 100;
 
-    private Viewport viewport;
-    private Camera camera;
+    Viewport viewport;
+    Camera camera;
+    ArrayList<Planet> planets;
+
+    boolean pause;
+    float epochs = 2000;
     private ShapeRenderer renderer;
-
-    private Satellite satellite;
-    private InputManager manager;
 
     @Override
     public void show() {
-        viewport = new FillViewport(INIT_WORLD_SIZE, INIT_WORLD_SIZE);
-        camera = viewport.getCamera();
         renderer = new ShapeRenderer();
-
-        satellite = new Satellite();
-        manager = new InputManager(viewport, camera, satellite);
-
-        Gdx.input.setInputProcessor(manager);
+        viewport = new ExtendViewport(WORLD_SIZE, WORLD_SIZE);
+        camera = viewport.getCamera();
+        planets = new ArrayList<>();
+        pause = true;
+        Gdx.input.setInputProcessor(new InputManager(this));
     }
 
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        manager.resize();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(BG.r, BG.g, BG.b, BG.a);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        manager.update(delta);
-        float epochs = manager.epochs;
-
-        while (epochs > 0) {
-            satellite.update(delta);
-            epochs--;
+        if (!pause) {
+            for (int i = 0; i < epochs; ++i) {
+                for (Planet planet : planets) {
+                    planet.update(delta, planets);
+                }
+            }
         }
 
-        viewport.apply();
         renderer.setProjectionMatrix(camera.combined);
+        viewport.apply();
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        satellite.draw(renderer);
-        manager.draw(renderer);
+        for (Planet planet : planets) {
+            planet.draw(renderer);
+        }
         renderer.end();
+    }
+
+    @Override
+    public void dispose() {
     }
 }

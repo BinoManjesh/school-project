@@ -1,87 +1,106 @@
 package com.bino.gravitation;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 class InputManager extends InputAdapter {
 
-    private static final int SIZE_SPEED = 10;
-    private static final int EPOCH_SPEED = 1000;
-    private static final int INIT_EPOCHS = 2000;
-    private static final float VELOCITY_COEFFICIENT = 0.001f;
+    private static final int MAX_DISTANCE = 5;
 
-    float epochs;
+    private MainScreen screen;
+    private boolean shouldPan;
+    private Vector2 initPos;
 
-    private Viewport viewport;
-    private Camera camera;
-    private Satellite satellite;
-
-    private float widthRatio;
-    private float heightRatio;
-
-    private boolean isDragging;
-    private Vector2 touchPos;
-
-    InputManager(Viewport viewport, Camera camera, Satellite satellite) {
-        this.viewport = viewport;
-        this.camera = camera;
-        this.satellite = satellite;
-
-        widthRatio = viewport.getWorldWidth() / viewport.getScreenWidth();
-        heightRatio = viewport.getWorldHeight() / viewport.getScreenHeight();
-
-        epochs = INIT_EPOCHS;
+    InputManager(MainScreen screen) {
+        this.screen = screen;
+        shouldPan = true;
+        initPos = new Vector2();
     }
 
-    void update(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-            epochs += delta * EPOCH_SPEED;
+    @Override
+    public boolean scrolled(int amount) {
+        float worldWidth, worldHeight;
+        if (amount == 1) {
+            worldWidth = screen.viewport.getWorldWidth() * 1.1f;
+            worldHeight = screen.viewport.getWorldHeight() * 1.1f;
+        } else {
+            worldWidth = screen.viewport.getWorldWidth() / 1.1f;
+            worldHeight = screen.viewport.getWorldHeight() / 1.1f;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-            epochs -= delta * EPOCH_SPEED;
-        }
+        screen.viewport.setWorldSize(worldWidth, worldHeight);
+
+        return true;
     }
 
-    void draw(ShapeRenderer renderer) {
-        if (isDragging) {
-            renderer.line(satellite.position, touchPos);
+    @Override
+    public boolean keyTyped(char c) {
+        if (Planet.selected != null) {
+            switch (c) {
+                case '\b':
+                    screen.planets.remove(Planet.selected);
+                    Planet.selected = null;
+                    break;
+                case '+':
+                    Planet.selected.scaleRadius(1.1f);
+                    break;
+                case '-':
+                    Planet.selected.scaleRadius(1 / 1.1f);
+                    break;
+            }
         }
+
+        switch (c) {
+            case ' ':
+                screen.pause = !screen.pause;
+                break;
+            case 'a':
+                screen.epochs *= 1.1;
+                break;
+            case 'd':
+                screen.epochs /= 1.1;
+                break;
+            case 13:
+                screen.planets.clear();
+                break;
+        }
+
+        return true;
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (!satellite.alive) {
-            touchPos = viewport.unproject(new Vector2(screenX, screenY));
-            if (isInSatellite(touchPos)) {
-                isDragging = true;
-                System.out.println("isDragging = " + true);
-            } else {
-                satellite.position = touchPos;
+        initPos.x = screenX;
+        initPos.y = screenY;
+        Vector2 touchPos = screen.viewport.unproject(new Vector2(screenX, screenY));
+        shouldPan = true;
+        for (Planet planet : screen.planets) {
+            if (planet.contains(touchPos)) {
+                shouldPan = false;
+                Planet.selected = planet;
+                break;
             }
         }
 
         return true;
     }
 
-    private boolean isInSatellite(Vector2 touchPos) {
-        return (touchPos.x > (satellite.position.x - Satellite.RADIUS) &&
-                touchPos.x < (satellite.position.x + Satellite.RADIUS)) &&
-                (touchPos.y > (satellite.position.y - Satellite.RADIUS) &&
-                        touchPos.y < (satellite.position.y + Satellite.RADIUS));
-    }
-
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (!isDragging) {
-            System.out.println("Panning");
-            camera.translate(-Gdx.input.getDeltaX() * widthRatio, Gdx.input.getDeltaY() * heightRatio, 0);
-        } else {
-            touchPos = viewport.unproject(new Vector2(screenX, screenY));
+        if (shouldPan) {
+            float deltaX = -Gdx.input.getDeltaX() * screen.viewport.getWorldWidth() / screen.viewport.getScreenWidth();
+            float deltaY = Gdx.input.getDeltaY() * screen.viewport.getWorldHeight() / screen.viewport.getScreenHeight();
+            screen.camera.translate(deltaX, deltaY, 0);
+        } else if (Planet.selected != null) {
+            Vector2 touchPos = screen.viewport.unproject(new Vector2(screenX, screenY));
+            if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+                Planet.selected.x = touchPos.x;
+                Planet.selected.y = touchPos.y;
+            } else if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
+                Planet.selected.velocity.x = (Planet.selected.x - touchPos.x) * Planet.velocity_scale;
+                Planet.selected.velocity.y = (Planet.selected.y - touchPos.y) * Planet.velocity_scale;
+            }
         }
 
         return true;
@@ -89,43 +108,12 @@ class InputManager extends InputAdapter {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (isDragging) {
-            satellite.alive = true;
-            satellite.velocity =
-                    viewport.unproject(new Vector2(screenX, screenY)).sub(satellite.position).scl(VELOCITY_COEFFICIENT);
-            System.out.println(satellite.velocity);
-            satellite.velocity.scl(-1);
-            isDragging = false;
+        if (shouldPan && Vector2.dst2(screenX, screenY, initPos.x, initPos.y) < MAX_DISTANCE * MAX_DISTANCE) {
+            Vector2 touchPos = screen.viewport.unproject(new Vector2(screenX, screenY));
+            Planet.selected = new Planet(touchPos);
+            screen.planets.add(Planet.selected);
         }
 
         return true;
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.SPACE) {
-            satellite.init();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        resize();
-        float worldHeight = viewport.getWorldHeight();
-        float worldWidth = viewport.getWorldWidth();
-
-        worldWidth += SIZE_SPEED * amount;
-        worldHeight += SIZE_SPEED * amount;
-
-        viewport.setWorldSize((worldWidth < 1) ? 1 : worldWidth, (worldHeight < 1) ? 1 : worldHeight);
-
-        return true;
-    }
-
-    void resize() {
-        widthRatio = viewport.getWorldWidth() / viewport.getScreenWidth();
-        heightRatio = viewport.getWorldHeight() / viewport.getScreenHeight();
     }
 }
