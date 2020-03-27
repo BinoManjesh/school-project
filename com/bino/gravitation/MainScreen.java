@@ -47,6 +47,13 @@ class MainScreen extends ScreenAdapter {
                 for (Planet planet : planets) {
                     planet.update(delta, planets);
                 }
+                for (Planet planet1 : planets) {
+                    for (Planet planet2 : planets) {
+                        if (planet1 != planet2) {
+                            planet1.collide(planet2);
+                        }
+                    }
+                }
             }
         }
 
