@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 class Planet extends Circle {
 
-    private static final float G = 1;
+    private static final float G = 5;
 
     static float velocity_scale = 0.1f;
     static Planet selected;
