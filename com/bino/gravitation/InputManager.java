@@ -55,12 +55,6 @@ class InputManager extends InputAdapter {
             case ' ':
                 screen.pause = !screen.pause;
                 break;
-            case 'a':
-                screen.epochs *= 1.1;
-                break;
-            case 'd':
-                screen.epochs /= 1.1;
-                break;
             case 13:
                 screen.planets.clear();
                 break;

@@ -19,7 +19,6 @@ class MainScreen extends ScreenAdapter {
     ArrayList<Planet> planets;
 
     boolean pause;
-    float epochs = 2000;
     private ShapeRenderer renderer;
 
     @Override
@@ -43,15 +42,16 @@ class MainScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (!pause) {
-            for (int i = 0; i < epochs; ++i) {
-                for (Planet planet : planets) {
-                    planet.update(delta, planets);
-                }
-                for (Planet planet1 : planets) {
-                    for (Planet planet2 : planets) {
-                        if (planet1 != planet2) {
-                            planet1.collide(planet2);
-                        }
+            for (Planet planet : planets) {
+                planet.setAcceleration(planets);
+            }
+            for (Planet planet : planets) {
+                planet.update(delta);
+            }
+            for (Planet planet1 : planets) {
+                for (Planet planet2 : planets) {
+                    if (planet1 != planet2) {
+                        planet1.collide(planet2);
                     }
                 }
             }
