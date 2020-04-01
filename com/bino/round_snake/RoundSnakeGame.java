@@ -1,16 +1,11 @@
-package com.bino.multi_snake;
+package com.bino.round_snake;
 
 import com.badlogic.gdx.Game;
 
-public class SnakeGame extends Game {
+public class RoundSnakeGame extends Game {
 
     @Override
     public void create() {
         setScreen(new MainScreen());
-    }
-
-    @Override
-    public void pause() {
-
     }
 }

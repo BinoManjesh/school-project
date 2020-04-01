@@ -56,6 +56,12 @@ class MainScreen extends ScreenAdapter {
                 }
             }
         }
+        if (!pause) {
+            for (Planet planet : planets) {
+                Gdx.app.log("PLANET", "" + planet);
+            }
+            Gdx.app.log("OVER", "");
+        }
 
         renderer.setProjectionMatrix(camera.combined);
         viewport.apply();
