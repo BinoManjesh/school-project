@@ -31,6 +31,8 @@ class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        Gdx.app.log("FRAME RATE", "" + 1 / delta);
+
         snake.update(delta);
 
         viewport.apply();
