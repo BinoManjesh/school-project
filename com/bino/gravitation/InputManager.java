@@ -92,8 +92,8 @@ class InputManager extends InputAdapter {
                 Planet.selected.x = touchPos.x;
                 Planet.selected.y = touchPos.y;
             } else if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-                Planet.selected.velocity.x = (Planet.selected.x - touchPos.x) * Planet.velocity_scale;
-                Planet.selected.velocity.y = (Planet.selected.y - touchPos.y) * Planet.velocity_scale;
+                Planet.selected.setVelocityX((Planet.selected.x - touchPos.x) * Planet.velocity_scale);
+                Planet.selected.setVelocityY((Planet.selected.y - touchPos.y) * Planet.velocity_scale);
             }
         }
 
