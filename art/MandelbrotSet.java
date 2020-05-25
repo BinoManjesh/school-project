@@ -5,14 +5,14 @@ import java.awt.event.KeyEvent;
 
 class MandelbrotSet extends Plot {
 
-    private int maxDivergence = 1001;
+    private int maxDivergence = 100;
 
     MandelbrotSet() {
-        super(250, 250);
+        super(500, 500);
         //scale, camX, camY are variables inherited from Plot
         scale = 4.0 / 250;
-        camX = -1.7490812690237831;
-        camY = -4.9135633356879E-6;
+        camX = 0;
+        camY = 0;
     }
 
     /*
@@ -48,7 +48,10 @@ class MandelbrotSet extends Plot {
 
     @Override
     protected void paintComponent(Graphics g) {
+        long startTime = System.nanoTime();
         super.paintComponent(g);
+        double timeTaken = (System.nanoTime() - startTime) * 1e-9f;
+        System.out.print("\r" + timeTaken);
     }
 
     @Override
