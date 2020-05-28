@@ -22,15 +22,6 @@ class Vector3 {
         return new Vector3(this);
     }
 
-    Vector3 rotateZ(double theta) {
-        Vector3 rotated = new Vector3();
-        double cos = Math.cos(theta), sin = Math.sin(theta);
-        rotated.x = x * cos - y * sin;
-        rotated.y = x * sin + y * cos;
-        rotated.z = z;
-        return rotated;
-    }
-
     Vector3 rotateX(double theta) {
         Vector3 rotated = new Vector3();
         double cos = Math.cos(theta), sin = Math.sin(theta);
@@ -40,10 +31,76 @@ class Vector3 {
         return rotated;
     }
 
+    Vector3 rotateY(double theta) {
+        Vector3 rotated = new Vector3();
+        double cos = Math.cos(theta), sin = Math.sin(theta);
+        rotated.x = z * sin + x * cos;
+        rotated.y = y;
+        rotated.z = z * cos - x * sin;
+        return rotated;
+    }
+
+    Vector3 rotateZ(double theta) {
+        Vector3 rotated = new Vector3();
+        double cos = Math.cos(theta), sin = Math.sin(theta);
+        rotated.x = x * cos - y * sin;
+        rotated.y = x * sin + y * cos;
+        rotated.z = z;
+        return rotated;
+    }
+
     Vector3 add(double x, double y, double z) {
         this.x += x;
         this.y += y;
         this.z += z;
+        return this;
+    }
+
+    Vector3 add(Vector3 v) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        return this;
+    }
+
+    Vector3 sub(Vector3 v) {
+        x -= v.x;
+        y -= v.y;
+        z -= v.z;
+        return this;
+    }
+
+    Vector3 sub(double x, double y, double z) {
+        this.x -= x;
+        this.y -= y;
+        this.z -= z;
+        return this;
+    }
+
+    Vector3 cross(Vector3 v) {
+        Vector3 cross = new Vector3();
+        cross.x = y * v.z - z * v.y;
+        cross.y = z * v.x - x * v.z;
+        cross.z = x * v.y - y * v.x;
+        return cross;
+    }
+
+    double dot(Vector3 v) {
+        return x * v.x + y * v.y + z * v.z;
+    }
+
+    Vector3 scale(double scalar) {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        return this;
+    }
+
+    Vector3 normalize() {
+        double magnitude = Math.sqrt(x*x + y*y + z*z);
+        x /= magnitude;
+        y /= magnitude;
+        z /= magnitude;
         return this;
     }
 }

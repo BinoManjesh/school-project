@@ -26,16 +26,16 @@ class Mesh {
                 if (lineSc.hasNext()) {
                     String tok = lineSc.next();
                     if (tok.equals("v")) {
-                        vertices.add(new Vector3(lineSc.nextDouble(), lineSc.nextDouble(), lineSc.nextDouble()));
+                        vertices.add(new Vector3(lineSc.nextDouble(), lineSc.nextDouble(), -lineSc.nextDouble()));
                     } else if (tok.equals("f")) {
-                        int[] indices = new int[3];
+                        int[] vIndices = new int[3];
                         for (int i = 0; i < 3; ++i) {
-                            indices[i] = lineSc.nextInt();
-                            lineSc.nextInt();
-                            lineSc.nextInt();
+                            vIndices[i] = -lineSc.nextInt();
+                            lineSc.next();
+                            lineSc.next();
                         }
-                        triangles.add(new Triangle(vertices.get(indices[0] - 1).copy(),
-                                vertices.get(indices[1] - 1).copy(), vertices.get(indices[2] - 1).copy()));
+                        triangles.add(new Triangle(vertices.get(vIndices[0] - 1).copy(),
+                                vertices.get(vIndices[1] - 1).copy(), vertices.get(vIndices[2] - 1).copy()));
                     }
                 }
             }
