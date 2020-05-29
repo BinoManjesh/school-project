@@ -13,7 +13,7 @@ class Triangle {
         points[2] = p3;
         Vector3 t1 = p2.copy().sub(p1);
         Vector3 t2 = p3.copy().sub(p1);
-        normal = t1.cross(t2);
+        normal = t2.cross(t1);
         normal.normalize();
     }
 

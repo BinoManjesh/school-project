@@ -10,4 +10,9 @@ class Vector2 {
     }
 
     Vector2() {}
+
+    @Override
+    public String toString() {
+        return String.format("(x: %d, y: %d)", x, y);
+    }
 }

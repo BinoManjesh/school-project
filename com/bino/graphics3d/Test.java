@@ -42,11 +42,11 @@ class Test {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			g.setColor(Color.RED);
-			Main.drawTriangle(g, p);
+			Renderer.drawTriangle(g, p);
 			g.setColor(Color.WHITE);
-			Main.fillTriangle(g, p);
+			Renderer.fillTriangle(g, p);
 			g.setColor(Color.RED);
-			Main.drawTriangle(g, p);
+			Renderer.drawTriangle(g, p);
 			for (Vector2 point : p) {
 				g.drawOval((int)point.x - RADIUS, (int)point.y - RADIUS, 2*RADIUS, 2*RADIUS);
 			}

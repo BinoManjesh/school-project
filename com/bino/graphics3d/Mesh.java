@@ -30,7 +30,7 @@ class Mesh {
                     } else if (tok.equals("f")) {
                         int[] vIndices = new int[3];
                         for (int i = 0; i < 3; ++i) {
-                            vIndices[i] = -lineSc.nextInt();
+                            vIndices[i] = lineSc.nextInt();
                             lineSc.next();
                             lineSc.next();
                         }
