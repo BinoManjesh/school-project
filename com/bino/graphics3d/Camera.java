@@ -1,39 +1,88 @@
 package com.bino.graphics3d;
 
+import com.bino.graphics3d.math.*;
+
 public class Camera {
 
 	public Vector3 position;
+	public float theta;
+	public Vector3 front;
+	public Vector3 up;
+	public Vector3 right;
 	public int screenWidth, screenHeight;
 
-	private Vector3 front;
-	private Vector3 up;
-	private Vector3 right;
+	private int[][] translate;
+	private int[][] rotate;
+	private int[][] project;
+	private int[][] combined;
 
-	private double theta;
-
-	private double k;
 
 	public Camera(int screenWidth, int screenHeight) {
 		position = new Vector3();
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
+		theta = (float)Math.PI / 2;
+
 		front = new Vector3(0, 0, -1);
 		up = new Vector3(0, 1, 0);
 		right = new Vector3(1, 0, 0);
-		theta = Math.PI / 2;
-		k = screenWidth / (2 * Math.tan(theta / 2));
+
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
+
+		translate = new int[4][4];
+		for (int i = 0; i < 4; ++i) {
+			translate[i][i] = 1;
+		}
+
+		rotate = new int[4][4];
+		rotate[3][3] = 1;
+
+		project = new int[4][4];
+		project[2][2] = 1;
+		project[3][3] = 1;
+
+		combined = new int[4][4];
+
+		update();
 	}
 
-	public Vector2 project(Vector3 v) {
-		Vector3 t1 = v.copy().sub(position);
-		Vector3 t2 = new Vector3();
-		t2.x = t1.dot(right);
-		t2.y = t1.dot(up);
-		t2.z = t1.dot(front);
+	public void update() {
+		translate[0][2] = -position.x;
+		translate[1][2] = -position.y;
+		translate[2][2] = -position.z;
 
-		Vector2 projected = new Vector2();
-        projected.x = screenWidth / 2.0 + k * t2.x / t2.z;
-        projected.y = screenHeight /2.0 - k * t2.y / t2.z;
+		rotate[0][0] = right.x;
+		rotate[0][1] = right.y;
+		rotate[0][2] = right.z;
+
+		rotate[1][0] = up.x;
+		rotate[1][1] = up.y;
+		rotate[1][2] = up.z;
+
+		rotate[2][0] = -front.x;
+		rotate[2][1] = -front.y;
+		rotate[2][2] = -front.z;
+
+		project[0][0] = screenWidth / (float)Math.tan(theta/2);
+		project[1][1] = project[0][0];
+
+		combined = Matrix.multiply(project, Matrix.multiply(rotate, translate));
+	}
+
+	public Vector3 project(Vector3 v) {
+		Vector3 projected = new Vector3();
+        projected.x = v.x * combined[0][0] + v.y * combined[0][1] + v.z * combined[0][2] + combined[0][3];
+        projected.y = v.x * combined[1][0] + v.y * combined[1][1] + v.z * combined[1][2] + combined[1][3];
+        projected.z = v.x * combined[2][0] + v.y * combined[2][1] + v.z * combined[2][2] + combined[2][3];
+        projected.x /= projected.z;
+        projected.y /= projected.z;
         return projected;
+	}
+
+	public void setTheta() {
+		
+	}
+
+	public void setPosition() {
+
 	}
 }

@@ -1,4 +1,4 @@
-package com.bino.graphics3d;
+package com.bino.graphics3d.test.triangle;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -34,7 +34,7 @@ class Test {
 		});
 
 		int frames = 0;
-		double timer = System.currentTimeMillis();
+		float timer = System.currentTimeMillis();
 		while(true) {
 			BufferStrategy bs = canvas.getBufferStrategy();
 			Graphics g = bs.getDrawGraphics();

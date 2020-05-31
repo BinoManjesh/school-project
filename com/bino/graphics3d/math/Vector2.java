@@ -2,9 +2,9 @@ package com.bino.graphics3d;
 
 class Vector2 {
 
-    double x, y;
+    float x, y;
 
-    Vector2(double x, double y) {
+    Vector2(float x, float y) {
         this.x = x;
         this.y = y;
     }

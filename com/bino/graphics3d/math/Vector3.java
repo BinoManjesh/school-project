@@ -2,11 +2,11 @@ package com.bino.graphics3d;
 
 class Vector3 {
 
-    double x, y, z;
+    float x, y, z;
 
     Vector3() {}
 
-    Vector3(double x, double y, double z) {
+    Vector3(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -22,34 +22,34 @@ class Vector3 {
         return new Vector3(this);
     }
 
-    Vector3 rotateX(double theta) {
+    Vector3 rotateX(float theta) {
         Vector3 rotated = new Vector3();
-        double cos = Math.cos(theta), sin = Math.sin(theta);
+        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = x;
         rotated.y = y * cos - z * sin;
         rotated.z = y * sin + z * cos;
         return rotated;
     }
 
-    Vector3 rotateY(double theta) {
+    Vector3 rotateY(float theta) {
         Vector3 rotated = new Vector3();
-        double cos = Math.cos(theta), sin = Math.sin(theta);
+        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = z * sin + x * cos;
         rotated.y = y;
         rotated.z = z * cos - x * sin;
         return rotated;
     }
 
-    Vector3 rotateZ(double theta) {
+    Vector3 rotateZ(float theta) {
         Vector3 rotated = new Vector3();
-        double cos = Math.cos(theta), sin = Math.sin(theta);
+        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = x * cos - y * sin;
         rotated.y = x * sin + y * cos;
         rotated.z = z;
         return rotated;
     }
 
-    Vector3 add(double x, double y, double z) {
+    Vector3 add(float x, float y, float z) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -70,7 +70,7 @@ class Vector3 {
         return this;
     }
 
-    Vector3 sub(double x, double y, double z) {
+    Vector3 sub(float x, float y, float z) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
@@ -85,11 +85,11 @@ class Vector3 {
         return cross;
     }
 
-    double dot(Vector3 v) {
+    float dot(Vector3 v) {
         return x * v.x + y * v.y + z * v.z;
     }
 
-    Vector3 scale(double scalar) {
+    Vector3 scale(float scalar) {
         x *= scalar;
         y *= scalar;
         z *= scalar;
@@ -97,7 +97,7 @@ class Vector3 {
     }
 
     Vector3 normalize() {
-        double magnitude = Math.sqrt(x*x + y*y + z*z);
+        float magnitude = (float)Math.sqrt(x*x + y*y + z*z);
         x /= magnitude;
         y /= magnitude;
         z /= magnitude;

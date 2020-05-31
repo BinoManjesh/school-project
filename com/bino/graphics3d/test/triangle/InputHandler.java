@@ -1,4 +1,4 @@
-package com.bino.graphics3d;
+package com.bino.graphics3d.test.triangle;
 
 import java.awt.event.*;
 
@@ -17,7 +17,7 @@ class TestMouseHandler extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		selected = null;
-		double x = e.getX() + 0.5, y = e.getY() + 0.5;
+		float x = e.getX() + 0.5f, y = e.getY() + 0.5f;
 		for (Vector2 point : p) {
 			if (Math.pow(point.x - x, 2) + Math.pow(point.y - y, 2) < RADIUS * RADIUS) {
 				selected = point;
@@ -29,8 +29,8 @@ class TestMouseHandler extends MouseAdapter {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (selected != null) {
-			selected.x = e.getX() + 0.5;
-			selected.y = e.getY() + 0.5;
+			selected.x = e.getX() + 0.5f;
+			selected.y = e.getY() + 0.5f;
 		}
 	}
 
