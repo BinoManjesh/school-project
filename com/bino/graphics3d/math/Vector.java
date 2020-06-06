@@ -1,29 +1,29 @@
-package com.bino.graphics3d;
+package com.bino.graphics3d.math;
 
-class Vector3 {
+public class Vector {
 
-    float x, y, z;
+    public float x, y, z;
 
-    Vector3() {}
+    public Vector() {}
 
-    Vector3(float x, float y, float z) {
+    public Vector(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    Vector3(Vector3 v) {
+    public Vector(Vector v) {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
     }
 
-    Vector3 copy() {
-        return new Vector3(this);
+    public Vector copy() {
+        return new Vector(this);
     }
 
-    Vector3 rotateX(float theta) {
-        Vector3 rotated = new Vector3();
+    public Vector rotateX(float theta) {
+        Vector rotated = new Vector();
         float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = x;
         rotated.y = y * cos - z * sin;
@@ -31,8 +31,8 @@ class Vector3 {
         return rotated;
     }
 
-    Vector3 rotateY(float theta) {
-        Vector3 rotated = new Vector3();
+    public Vector rotateY(float theta) {
+        Vector rotated = new Vector();
         float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = z * sin + x * cos;
         rotated.y = y;
@@ -40,8 +40,8 @@ class Vector3 {
         return rotated;
     }
 
-    Vector3 rotateZ(float theta) {
-        Vector3 rotated = new Vector3();
+    public Vector rotateZ(float theta) {
+        Vector rotated = new Vector();
         float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
         rotated.x = x * cos - y * sin;
         rotated.y = x * sin + y * cos;
@@ -49,54 +49,54 @@ class Vector3 {
         return rotated;
     }
 
-    Vector3 add(float x, float y, float z) {
+    public Vector add(float x, float y, float z) {
         this.x += x;
         this.y += y;
         this.z += z;
         return this;
     }
 
-    Vector3 add(Vector3 v) {
+    public Vector add(Vector v) {
         x += v.x;
         y += v.y;
         z += v.z;
         return this;
     }
 
-    Vector3 sub(Vector3 v) {
+    public Vector sub(Vector v) {
         x -= v.x;
         y -= v.y;
         z -= v.z;
         return this;
     }
 
-    Vector3 sub(float x, float y, float z) {
+    public Vector sub(float x, float y, float z) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
         return this;
     }
 
-    Vector3 cross(Vector3 v) {
-        Vector3 cross = new Vector3();
+    public Vector cross(Vector v) {
+        Vector cross = new Vector();
         cross.x = y * v.z - z * v.y;
         cross.y = z * v.x - x * v.z;
         cross.z = x * v.y - y * v.x;
         return cross;
     }
 
-    float dot(Vector3 v) {
+    public float dot(Vector v) {
         return x * v.x + y * v.y + z * v.z;
     }
 
-    Vector3 scale(float scalar) {
+    public Vector scale(float scalar) {
         x *= scalar;
         y *= scalar;
         z *= scalar;
         return this;
     }
 
-    Vector3 normalize() {
+    public Vector normalize() {
         float magnitude = (float)Math.sqrt(x*x + y*y + z*z);
         x /= magnitude;
         y /= magnitude;

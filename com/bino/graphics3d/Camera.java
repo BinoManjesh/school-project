@@ -4,43 +4,43 @@ import com.bino.graphics3d.math.*;
 
 public class Camera {
 
-	public Vector3 position;
+	public Vector position;
 	public float theta;
-	public Vector3 front;
-	public Vector3 up;
-	public Vector3 right;
+	public Vector front;
+	public Vector up;
+	public Vector right;
 	public int screenWidth, screenHeight;
 
-	private int[][] translate;
-	private int[][] rotate;
-	private int[][] project;
-	private int[][] combined;
+	private float[][] translate;
+	private float[][] rotate;
+	private float[][] project;
+	private float[][] combined;
 
 
 	public Camera(int screenWidth, int screenHeight) {
-		position = new Vector3();
+		position = new Vector();
 		theta = (float)Math.PI / 2;
 
-		front = new Vector3(0, 0, -1);
-		up = new Vector3(0, 1, 0);
-		right = new Vector3(1, 0, 0);
+		front = new Vector(0, 0, -1);
+		up = new Vector(0, 1, 0);
+		right = new Vector(1, 0, 0);
 
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 
-		translate = new int[4][4];
+		translate = new float[4][4];
 		for (int i = 0; i < 4; ++i) {
 			translate[i][i] = 1;
 		}
 
-		rotate = new int[4][4];
+		rotate = new float[4][4];
 		rotate[3][3] = 1;
 
-		project = new int[4][4];
+		project = new float[4][4];
 		project[2][2] = 1;
 		project[3][3] = 1;
 
-		combined = new int[4][4];
+		combined = new float[4][4];
 
 		update();
 	}
@@ -68,21 +68,13 @@ public class Camera {
 		combined = Matrix.multiply(project, Matrix.multiply(rotate, translate));
 	}
 
-	public Vector3 project(Vector3 v) {
-		Vector3 projected = new Vector3();
+	public Vector project(Vector v) {
+		Vector projected = new Vector();
         projected.x = v.x * combined[0][0] + v.y * combined[0][1] + v.z * combined[0][2] + combined[0][3];
         projected.y = v.x * combined[1][0] + v.y * combined[1][1] + v.z * combined[1][2] + combined[1][3];
         projected.z = v.x * combined[2][0] + v.y * combined[2][1] + v.z * combined[2][2] + combined[2][3];
         projected.x /= projected.z;
         projected.y /= projected.z;
         return projected;
-	}
-
-	public void setTheta() {
-		
-	}
-
-	public void setPosition() {
-
 	}
 }

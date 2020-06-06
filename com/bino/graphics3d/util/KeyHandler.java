@@ -1,19 +1,23 @@
 package com.bino.graphics3d.util;
 
 import java.awt.event.*;
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class KeyHandler extends KeyAdapter {
 
-	private HashMap<Integer, Boolean> map;
+	private HashSet<Integer> set;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		map.put(e.getKeyCode(), true);
+		set.add(e.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		map.put(e.getKeyCode(), false);
+		set.remove(e.getKeyCode());
+	}
+
+	public boolean isKeyPressed(int keyCode) {
+		return set.contains(keyCode);
 	}
 }

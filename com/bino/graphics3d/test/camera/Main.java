@@ -1,7 +1,13 @@
 package com.bino.graphics3d.test.camera;
 
 import com.bino.graphics3d.Camera;
+import com.bino.graphics3d.util.*;
+import com.bino.graphics3d.math.*;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -9,15 +15,22 @@ public class Main {
 
 	private Camera camera;
 	private Canvas canvas;
+	private ArrayList<Vector> vertices;
+	private ArrayList<Integer> indices;
 
 	private Main() {
-		canvas = new Canvas;
+		canvas = new Canvas();
+		vertices = new ArrayList<>();
+		indices = new ArrayList<>();
+		MeshLoader.load("3d objects/teapot.obj", vertices, indices);
+
 		JFrame frame = new JFrame("Camera Test");
 
 		Dimension size = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
 		frame.setMaximumSize(size);
 		frame.setMinimumSize(size);
 
+		canvas.addKeyListener(new KeyHandler());
 		frame.add(canvas);
 		frame.pack();
 		canvas.createBufferStrategy(3);
@@ -36,9 +49,19 @@ public class Main {
 		}
 	}
 
-	private void update(float dt) {}
+	private void update(float dt) {
+		
+	}
 
-	private void render() {}
+	private void render() {
+		BufferStrategy bs = canvas.getBufferStrategy();
+		Graphics g = bs.getDrawGraphics();
+
+		
+
+		g.dispose();
+		bs.show();
+	}
 
 	public static void main(String[] args) {
 		Main main = new Main();

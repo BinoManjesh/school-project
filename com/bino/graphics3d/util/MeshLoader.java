@@ -1,11 +1,14 @@
-package com.bino.graphics3d.utils;
+package com.bino.graphics3d.util;
 
-import com.bino.graphics3d.math.Vector3;
+import com.bino.graphics3d.math.Vector;
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class MeshLoader {
 
-	public static void load(String path, ArrayList<Vector3> vertices, ArrayList<Vector3> indices) {
+	public static void load(String path, ArrayList<Vector> vertices, ArrayList<Integer> indices) {
 		try {
             FileInputStream fin = new FileInputStream(path);
             Scanner sc = new Scanner(fin);
@@ -16,7 +19,7 @@ public class MeshLoader {
                 if (lineSc.hasNext()) {
                     String tok = lineSc.next();
                     if (tok.equals("v")) {
-                        vertices.add(new Vector3(lineSc.nextFloat(), lineSc.nextFloat(), -lineSc.nextFloat()));
+                        vertices.add(new Vector(lineSc.nextFloat(), lineSc.nextFloat(), -lineSc.nextFloat()));
                     } else if (tok.equals("f")) {
                         for (int i = 0; i < 3; ++i) {
                             indices.add(lineSc.nextInt());

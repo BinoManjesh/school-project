@@ -2,8 +2,8 @@ package com.bino.graphics3d.math;
 
 public class Matrix {
 
-	public static int[][] multiply(int[][] a, int[][] b) {
-		int[][] c = new int[4][4];
+	public static float[][] multiply(float[][] a, float[][] b) {
+		float[][] c = new float[4][4];
 		for (int i = 0; i < 4; ++i) {
 			for (int j = 0; j < 4; ++j) {
 				for (int k = 0; k < 4; ++k) {
