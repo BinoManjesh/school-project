@@ -24,7 +24,7 @@ public class Vector {
 
     public Vector rotateX(float theta) {
         Vector rotated = new Vector();
-        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
+        float cos = (float) Math.cos(theta), sin = (float) Math.sin(theta);
         rotated.x = x;
         rotated.y = y * cos - z * sin;
         rotated.z = y * sin + z * cos;
@@ -33,7 +33,7 @@ public class Vector {
 
     public Vector rotateY(float theta) {
         Vector rotated = new Vector();
-        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
+        float cos = (float) Math.cos(theta), sin = (float) Math.sin(theta);
         rotated.x = z * sin + x * cos;
         rotated.y = y;
         rotated.z = z * cos - x * sin;
@@ -42,7 +42,7 @@ public class Vector {
 
     public Vector rotateZ(float theta) {
         Vector rotated = new Vector();
-        float cos = (float)Math.cos(theta), sin = (float)Math.sin(theta);
+        float cos = (float) Math.cos(theta), sin = (float) Math.sin(theta);
         rotated.x = x * cos - y * sin;
         rotated.y = x * sin + y * cos;
         rotated.z = z;
@@ -96,11 +96,28 @@ public class Vector {
         return this;
     }
 
+    public Vector multiply(float[][] matrix) {
+        Vector product = new Vector();
+        product.x = matrix[0][0] * x + matrix[0][1] * y + matrix[0][2] * z + matrix[0][3];
+        product.y = matrix[1][0] * x + matrix[1][1] * y + matrix[1][2] * z + matrix[1][3];
+        product.z = matrix[2][0] * x + matrix[2][1] * y + matrix[2][2] * z + matrix[2][3];
+        return product;
+    }
+
     public Vector normalize() {
-        float magnitude = (float)Math.sqrt(x*x + y*y + z*z);
+        float magnitude = magnitude();
         x /= magnitude;
         y /= magnitude;
         z /= magnitude;
         return this;
+    }
+
+    public float magnitude() {
+        return (float) Math.sqrt(x * x + y * y + z * z);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%f, %f, %f]", x, y, z);
     }
 }

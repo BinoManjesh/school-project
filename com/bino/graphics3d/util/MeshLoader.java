@@ -19,10 +19,10 @@ public class MeshLoader {
                 if (lineSc.hasNext()) {
                     String tok = lineSc.next();
                     if (tok.equals("v")) {
-                        vertices.add(new Vector(lineSc.nextFloat(), lineSc.nextFloat(), -lineSc.nextFloat()));
+                        vertices.add(new Vector(lineSc.nextFloat(), -lineSc.nextFloat(), lineSc.nextFloat()));
                     } else if (tok.equals("f")) {
                         for (int i = 0; i < 3; ++i) {
-                            indices.add(lineSc.nextInt());
+                            indices.add(lineSc.nextInt() - 1);
                             lineSc.next();
                             lineSc.next();
                         }

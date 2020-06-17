@@ -5,7 +5,11 @@ import java.util.HashSet;
 
 public class KeyHandler extends KeyAdapter {
 
-	private HashSet<Integer> set;
+	private final HashSet<Integer> set;
+
+	public KeyHandler() {
+		set = new HashSet<>();
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {

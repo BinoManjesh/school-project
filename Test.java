@@ -1,18 +1,22 @@
-import java.io.*;
-import java.util.*;
+public class Test {
 
-class Test {
+	public static void main(String[] args)  {
+		C c = new C();
+	}
 
-	public static void main(String[] args) throws IOException {
-		FileInputStream fin = new FileInputStream("cube.obj");
-		Scanner sc = new Scanner(fin);
-		while (sc.hasNextLine()) {
-			Scanner lineSc = new Scanner(sc.nextLine());
-			lineSc.useDelimiter("[ /]");
-			while(lineSc.hasNext()) {
-				System.out.print(lineSc.next() + "|");
-			}
-			System.out.println();
+	private static class C extends B {
+		C() {
+			System.out.println("C's constructor");
 		}
+	}
+
+	private static class B extends A {
+		B() {
+			System.out.println("B's constructor");
+		}
+	}
+
+	private static class A {
+		A(int b) {}
 	}
 }

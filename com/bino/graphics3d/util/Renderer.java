@@ -76,7 +76,6 @@ public class Renderer {
 
     private static void fillDownTriangle(Screen screen, Vector... p) {
         int y;
-        if()
     }
 
     //	public static void fillTriangle(Graphics g, Vector2[] p) {

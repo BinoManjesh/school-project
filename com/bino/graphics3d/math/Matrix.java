@@ -13,4 +13,10 @@ public class Matrix {
 		}
 		return c;
 	}
+
+	public static void set(float[][] matrix, float... nums) {
+		for (int i = 0; i < 16; ++i) {
+			matrix[i/4][i%4] = nums[i];
+		}
+	}
 }
