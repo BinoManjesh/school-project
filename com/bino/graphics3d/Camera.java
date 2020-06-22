@@ -1,8 +1,11 @@
 package com.bino.graphics3d;
 
-import com.bino.graphics3d.math.*;
+import com.bino.graphics3d.math.Matrix;
+import com.bino.graphics3d.math.Vector;
+
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class Camera extends MouseMotionAdapter {
 
@@ -86,8 +89,8 @@ public class Camera extends MouseMotionAdapter {
 
 		combined = Matrix.multiply(project, Matrix.multiply(rotation, translate));
 
-		front.x = -cosP*sinY*cosR + sinP*sinR;
-		front.y = -cosP*sinY*sinR + sinP*cosR;
+		front.x = -cosP*sinY;//-cosP*sinY*cosR + sinP*sinR;
+		front.y = sinP;//-cosP*sinY*sinR + sinP*cosR;
 		front.z = cosP*cosY;
 
 		right.x = cosY*cosR;
