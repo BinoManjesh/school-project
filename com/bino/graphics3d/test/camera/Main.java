@@ -7,9 +7,9 @@ import com.bino.graphics3d.util.MeshLoader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -141,7 +141,6 @@ public class Main {
         }
         camera.update();
         Arrays.sort(order, this :: compare);
-        System.out.print("\r" + camera.roll + camera.position + camera.front);
     }
 
     private void render() {
@@ -152,23 +151,64 @@ public class Main {
         g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         
         for (int i : order) {
-            int[] pX = new int[3], pY = new int[3];
+            Vector[] projected = new Vector[4];
             int numBehind = 0;
             for (int j = i; j < i + 3; j++) {
-                Vector projected = camera.project(vertices[indices[j]]);
-                if (projected.z < 0) {
+                projected[j - i] = camera.project(vertices[indices[j]]);
+                if (projected[j - i].z < 0) {
                     numBehind++;
                 }
-                pX[j - i] = (int) projected.x;
-                pY[j - i] = (int) projected.y;
             }
-            if (numBehind < 3) {
+            if (numBehind == 0) {
                 Vector normal =
                         vertices[indices[i + 1]].copy().sub(vertices[indices[i]]).cross(vertices[indices[i + 2]].copy().sub(vertices[indices[i]]));
                 normal.normalize();
-                float intensity = (1 +camera.front.dot(normal)) / 2;
-                Color color = Color.getHSBColor(212/255f, 79/255f, intensity);
+                float intensity = (1 + camera.front.dot(normal)) / 2;
+                Color color = Color.getHSBColor(212 / 255f, 79 / 255f, intensity);
                 g.setColor(color);
+                int[] pX = new int[3];
+                int[] pY = new int[3];
+                for (int j = 0; j < 3; j++) {
+                    pX[j] = (int) projected[j].x;
+                    pY[j] = (int) projected[j].y;
+                }
+                g.fillPolygon(pX, pY, 3);
+            } else if (numBehind == 1) {
+                //                for (int j = 0; j < 3; ++j) {
+                //
+                //                }
+            } else if (numBehind == 2) {
+                float x2 = 0, y2 = 0, z2 = 0;
+                for (int j = 0; j < 3; ++j) {
+                    if (projected[j].z >= 0) {
+                        x2 = projected[j].x;
+                        y2 = projected[j].y;
+                        z2 = projected[j].z;
+                        break;
+                    }
+                }
+
+                for (int j = 0; j < 3; ++j) {
+                    if (projected[j].z < 0) {
+                        projected[j].x =
+                                -projected[j].x - projected[j].z * (x2 + projected[j].x) / (z2 - projected[j].z);
+                        projected[j].y =
+                                -projected[j].y - projected[j].z * (y2 + projected[j].y) / (z2 - projected[j].z);
+                    }
+                }
+
+                Vector normal =
+                        vertices[indices[i + 1]].copy().sub(vertices[indices[i]]).cross(vertices[indices[i + 2]].copy().sub(vertices[indices[i]]));
+                normal.normalize();
+                float intensity = (1 + camera.front.dot(normal)) / 2;
+                Color color = Color.getHSBColor(212 / 255f, 79 / 255f, intensity);
+                g.setColor(color);
+                int[] pX = new int[3];
+                int[] pY = new int[3];
+                for (int j = 0; j < 3; j++) {
+                    pX[j] = (int) projected[j].x;
+                    pY[j] = (int) projected[j].y;
+                }
                 g.fillPolygon(pX, pY, 3);
             }
         }
