@@ -1,66 +1,125 @@
 package art;
 
 import java.awt.*;
+import java.awt.event.*;
 
 class ChaosEquations extends Canvas {
 
     private static final int WIDTH = 1000, HEIGHT = WIDTH*9/16;
     private static final int N_POINTS = 100000;
-    private static final double SCALE = 100;
-
-    final long startTime;
     private final Color[] colors;
+    long prevTime;
+    boolean pause;
+    private double scale = 0.0005;
+    private double camX, camY;
+    private double speed = 0.01;
+    private double t;
 
     ChaosEquations() {
         super(WIDTH, HEIGHT);
+        setBackground(Color.BLACK);
+        frame.setTitle("Chaos Equations");
+
+        MouseInput mouseInput = new MouseInput();
+        frame.addMouseWheelListener(mouseInput);
+        frame.addMouseMotionListener(mouseInput);
+        frame.addMouseListener(mouseInput);
+        frame.addKeyListener(new KeyInput());
+
         colors = new Color[N_POINTS];
         for (int i = 0; i < N_POINTS; ++i) {
             colors[i] = new Color((int) (Math.random()*0xFFFFFF));
         }
-        startTime = System.nanoTime();
+        prevTime = System.nanoTime();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         ChaosEquations obj = new ChaosEquations();
         while (true) {
             obj.repaint();
-            Thread.sleep(500);
         }
+    }
+
+    double getNewX(double x, double y, double t) {
+        return -t*t - x*y + t;
+    }
+
+    double getNewY(double x, double y, double t) {
+        return -x*y + x*t + y + t;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        double t = (System.nanoTime() - startTime)*1e-9;
+        super.paintComponent(g);
+        long thisTime = System.nanoTime();
+        if (!pause)
+            t += (thisTime - prevTime)*1e-9*speed;
+        prevTime = thisTime;
         double x = t, y = t;
         for (int i = 0; i < N_POINTS; ++i) {
             g.setColor(colors[i]);
-            g.fillRect(getX(x), getY(y), 4, 4);
+            g.fillRect(getX(x), getY(y), 1, 1);
             double newX = getNewX(x, y, t);
             double newY = getNewY(x, y, t);
-            //            g.drawLine(getX(x), getY(y), getX(newX), getY(newY));
+            if (Double.isNaN(newX) || Double.isNaN(newY))
+                break;
             x = newX;
             y = newY;
-            if (Double.isNaN(x) || Double.isNaN(y)) {
-                System.out.println("WHHHHHHHHHHHHHHHHHHHHHHHYYYYYYYYYYY");
-            }
         }
+        g.setColor(Color.WHITE);
+        g.drawString("t:  " + t, 0, 10);
+        g.drawString("speed:  " + speed, 0, 22);
     }
 
     int getX(double x) {
-        return (int) (WIDTH/2 + x/SCALE);
+        return (int) (camX + getWidth()/2 + x/scale);
     }
 
     int getY(double y) {
-        return (int) (HEIGHT/2 - y/SCALE);
+        return (int) (camY + getHeight()/2 - y/scale);
     }
 
-    double getNewX(double x, double y, double t) {
-        return x*x - x*t + y + t;
+    class MouseInput extends MouseAdapter {
+
+        private int prevX, prevY;
+
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            scale *= Math.pow(1.5, e.getPreciseWheelRotation());
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            prevX = e.getX();
+            prevY = e.getY();
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            camX += e.getX() - prevX;
+            camY += e.getY() - prevY;
+            prevX = e.getX();
+            prevY = e.getY();
+        }
     }
 
-    double getNewY(double x, double y, double t) {
-        return x*x + y*y + t*t - x*t - x - y;
+    class KeyInput extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                case 'q':
+                    speed *= 1.1;
+                    break;
+                case 'e':
+                    speed /= 1.1;
+                    break;
+                case 'w':
+                    speed = -speed;
+                    break;
+                case ' ':
+                    pause = !pause;
+            }
+        }
     }
 }
